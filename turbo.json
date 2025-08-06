@@ -21,6 +21,12 @@
     "check-types": {
       "dependsOn": ["^check-types"]
     },
+    "format": {
+      "dependsOn": ["^format"]
+    },
+    "format:unsafe": {
+      "dependsOn": ["^format:unsafe"]
+    },
     "dev": {
       "cache": false,
       "persistent": true

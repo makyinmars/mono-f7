@@ -7,23 +7,23 @@
     "dev": "next dev --turbopack --port 3000",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint --max-warnings 0",
+    "lint": "ultracite lint",
+    "format": "ultracite format",
+    "format:unsafe": "ultracite format --unsafe",
     "check-types": "tsc --noEmit",
     "clean": "rm -rf .next node_modules dist .turbo"
   },
   "dependencies": {
     "@repo/ui": "*",
     "next": "^15.4.2",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react": "catalog:",
+    "react-dom": "catalog:"
   },
   "devDependencies": {
-    "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
     "@types/node": "^22.15.3",
-    "@types/react": "19.1.0",
-    "@types/react-dom": "19.1.1",
-    "eslint": "^9.31.0",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
     "typescript": "catalog:"
   }
 }

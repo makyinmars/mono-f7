@@ -3,7 +3,9 @@
   "scripts": {
     "dev": "bun run --hot src/index.ts",
     "build": "tsc --noEmit",
-    "lint": "eslint src --max-warnings 0",
+    "lint": "ultracite lint",
+    "format": "ultracite format",
+    "format:unsafe": "ultracite format --unsafe",
     "check-types": "tsc --noEmit",
     "clean": "rm -rf node_modules dist .turbo"
   },
@@ -11,9 +13,7 @@
     "hono": "^4.8.12"
   },
   "devDependencies": {
-    "@repo/eslint-config": "*",
     "@types/bun": "catalog:",
-    "eslint": "^9.31.0",
     "typescript": "catalog:"
   }
 }
