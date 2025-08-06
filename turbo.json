@@ -4,8 +4,16 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"]
+    },
+    "web#build": {
       "outputs": [".next/**", "!.next/cache/**"]
+    },
+    "docs#build": {
+      "outputs": [".next/**", "!.next/cache/**"]
+    },
+    "server#build": {
+      "outputs": []
     },
     "lint": {
       "dependsOn": ["^lint"]
@@ -16,6 +24,9 @@
     "dev": {
       "cache": false,
       "persistent": true
+    },
+    "clean": {
+      "cache": false
     }
   }
 }
