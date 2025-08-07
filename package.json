@@ -6,7 +6,7 @@
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "format": "turbo run format",
-    "format:unstaged": "turbo run format:unstaged",
+    "format:unsafe": "turbo run format:unsafe",
     "check-types": "turbo run check-types",
     "clean": "turbo run clean"
   },
@@ -39,8 +39,7 @@
   "packageManager": "bun@1.2.19",
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json,jsonc,css,scss,md,mdx}": [
-      "npx ultracite format"
+      "bunx ultracite format"
     ]
   }
 }
-
