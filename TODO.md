@@ -4,14 +4,16 @@
 
 ### Full-Stack Framework
 
-- [ ] **Add TanStack Start**
-  - [ ] Install TanStack Start dependencies
-  - [ ] Configure TanStack Router for file-based routing
-  - [ ] Setup SSR/SSG configuration
-  - [ ] Migrate existing Next.js routes to TanStack Start
-  - [ ] Configure shared layouts and error boundaries
+- [x] **Add TanStack Start** ✅ *COMPLETED*
+  - [x] Install TanStack Start dependencies
+  - [x] Configure TanStack Router for file-based routing
+  - [x] Setup SSR/SSG configuration
+  - [x] Create initial routes and components
+  - [x] Configure shared layouts and error boundaries
+  - [x] Setup Biome config to ignore auto-generated files
   - *Complexity: High*
   - *Reference: <https://tanstack.com/start/latest>*
+  - *Status: Store app created with TanStack Start*
 
 ### API Layer
 
@@ -172,21 +174,20 @@
 
 ### Current Stack
 
-- **Runtime**: Bun (server), Node.js (Next.js apps)
-- **Framework**: Next.js (web, docs), Hono (server)
+- **Runtime**: Bun (server), Node.js (TanStack Start)
+- **Framework**: TanStack Start (store), Hono (server)
 - **Styling**: Tailwind CSS v4, shadcn/ui
 - **Package Manager**: Bun workspaces
 - **Build Tool**: Turborepo
-- **Code Quality**: Ultracite (linting/formatting)
+- **Code Quality**: Ultracite (linting/formatting) with Biome config
 
 ### Repository Structure
 
 ```
 mono-f7/
 ├── apps/
-│   ├── web/       # Main application
-│   ├── docs/      # Documentation site
-│   └── server/    # API server
+│   ├── server/    # API server (Bun + Hono)
+│   └── store/     # TanStack Start app ✅
 ├── packages/
 │   ├── ui/        # Shared components
 │   ├── typescript-config/
@@ -215,4 +216,5 @@ mono-f7/
 
 ---
 *Last Updated: 2025-08-09*
+*TanStack Start completed - Store app now running*
 

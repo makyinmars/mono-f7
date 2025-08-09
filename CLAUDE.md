@@ -4,13 +4,12 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a Turborepo monorepo with three applications and shared packages:
+This is a Turborepo monorepo with two applications and shared packages:
 
 ### Applications
 
-- **web** - Next.js app on port 3000 (main web application)
-- **docs** - Next.js app on port 3001 (documentation site)
 - **server** - Bun/Hono API server on port 3005
+- **store** - TanStack Start app with file-based routing for SSR/SSG capabilities
 
 ### Packages
 
@@ -66,14 +65,12 @@ turbo clean
 
 ```bash
 # Run specific app
-turbo dev --filter=web
-turbo dev --filter=docs  
 turbo dev --filter=server
+turbo dev --filter=store
 
 # Build specific app
-turbo build --filter=web
-turbo build --filter=docs
 turbo build --filter=server
+turbo build --filter=store
 ```
 
 ### Component Generation
@@ -89,6 +86,7 @@ turbo gen react-component
 - **Linting/Formatting**: Ultracite (replaces ESLint) with Biome configuration
 - **Pre-commit**: Uses lint-staged to format staged files with Ultracite
 - **Git Hooks**: Lefthook configured but currently using example configuration only
+- **Biome Config**: Configured to ignore auto-generated files like `routeTree.gen.ts`
 
 ## Architecture Notes
 

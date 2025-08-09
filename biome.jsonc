@@ -3,15 +3,20 @@
   "linter": {
     "rules": {
       "a11y": {
-        "useButtonType": "off"
+        "useButtonType": "off",
+        "useHtmlLang": "off"
       },
       "nursery": {
         "noUnknownAtRule": "off"
       },
       "correctness": {
         "noInvalidPositionAtImportRule": "off"
+      },
+      "style": {
+        "noHeadElement": "off"
       }
-    }
+    },
+    "includes": ["**", "!**/routeTree.gen.ts"]
   },
   "extends": ["ultracite"]
 }

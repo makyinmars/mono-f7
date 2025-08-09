@@ -17,10 +17,8 @@ This project aims to be a comprehensive example of modern web development practi
 
 ### Applications
 
-- **`web`** - Next.js application (main web app) on port 3000
-- **`docs`** - Next.js documentation site on port 3001  
 - **`server`** - Hono API server with Bun runtime on port 3005
-- **`start-basic`** - TanStack Start application for SSR/SSG capabilities
+- **`store`** - TanStack Start application with file-based routing for SSR/SSG capabilities
 
 ### Packages
 
@@ -79,17 +77,11 @@ turbo dev
 Start individual applications:
 
 ```bash
-# Next.js web app (port 3000)
-turbo dev --filter=web
-
-# Next.js docs site (port 3001)  
-turbo dev --filter=docs
-
 # Hono server (port 3005)
 turbo dev --filter=server
 
-# TanStack Start app 
-turbo dev --filter=start-basic
+# TanStack Start app
+turbo dev --filter=store
 ```
 
 ### Build
@@ -101,7 +93,8 @@ Build all applications and packages:
 bun run build
 
 # Build specific app
-turbo build --filter=web
+turbo build --filter=server
+turbo build --filter=store
 ```
 
 ### Code Quality
@@ -125,11 +118,11 @@ This project follows a structured development approach with clear priorities. Se
 
 ### Current Status
 - ✅ Turborepo monorepo structure
-- ✅ Next.js applications (web, docs)
 - ✅ Hono API server with Bun
-- ✅ TanStack Start integration
+- ✅ TanStack Start application with file-based routing
 - ✅ shadcn/ui component library
-- ✅ Ultracite linting and formatting
+- ✅ Ultracite linting and formatting with Biome configuration
+- ✅ Auto-generated file exclusion in Biome config
 
 ### Next Milestones
 1. **Core Infrastructure** - tRPC API, Drizzle ORM, Better Auth, Docker setup
@@ -142,10 +135,8 @@ This project follows a structured development approach with clear priorities. Se
 ```
 mono-f7/
 ├── apps/
-│   ├── web/          # Next.js main application
-│   ├── docs/         # Next.js documentation site  
 │   ├── server/       # Hono API server (Bun)
-│   └── start-basic/  # TanStack Start application
+│   └── store/        # TanStack Start application
 ├── packages/
 │   ├── ui/           # Shared React components
 │   └── typescript-config/ # TypeScript configurations
@@ -157,12 +148,11 @@ mono-f7/
 
 ### Development
 All applications run locally with hot reload enabled:
-- Web app: http://localhost:3000
-- Docs: http://localhost:3001  
+- Store app: http://localhost:3000 (TanStack Start)
 - Server API: http://localhost:3005
 
 ### Production (Planned)
-- **Frontend**: Vercel deployment for Next.js apps
+- **Frontend**: Vercel deployment for TanStack Start app
 - **Backend**: Docker containers on Railway/Fly.io
 - **Database**: PostgreSQL with automated backups
 - **CDN**: Static assets via Vercel Edge Network
