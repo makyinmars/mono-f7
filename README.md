@@ -33,8 +33,8 @@ This project aims to be a comprehensive example of modern web development practi
 
 ### Tech Stack
 
-- **Runtime**: [Bun](https://bun.sh/) for server apps, Node.js for Next.js apps
-- **Framework**: Next.js, TanStack Start, Hono
+- **Runtime**: [Bun](https://bun.sh/) for server apps, Node.js for TanStack Start
+- **Framework**: TanStack Start, Hono
 - **Database**: PostgreSQL with [Drizzle ORM](https://orm.drizzle.team/)
 - **Authentication**: [Better Auth](https://www.better-auth.com/) with OAuth support
 - **API**: [tRPC](https://trpc.io/) for end-to-end type safety
@@ -112,6 +112,21 @@ bun run format
 bun run check-types
 ```
 
+### Docker Development
+
+The project includes Docker support for containerized development and deployment:
+
+```bash
+# Build all Docker images
+bun run docker:build
+
+# Build individual images
+bun run docker:build:store
+
+# Run containers
+bun run docker:run:store   # http://localhost:3000
+```
+
 ## 🗺️ Roadmap
 
 This project follows a structured development approach with clear priorities. See [TODO.md](./TODO.md) for the complete roadmap.
@@ -123,6 +138,7 @@ This project follows a structured development approach with clear priorities. Se
 - ✅ shadcn/ui component library
 - ✅ Ultracite linting and formatting with Biome configuration
 - ✅ Auto-generated file exclusion in Biome config
+- 🚧 Docker containerization (store app completed)
 
 ### Next Milestones
 1. **Core Infrastructure** - tRPC API, Drizzle ORM, Better Auth, Docker setup
@@ -167,6 +183,7 @@ This project serves as a reference implementation for modern full-stack developm
 3. Make changes following existing patterns
 4. Run quality checks: `bun run lint && bun run check-types`
 5. Test your changes across all affected applications
+6. Build Docker images for deployment: `bun run docker:build`
 
 ## 📚 Resources
 

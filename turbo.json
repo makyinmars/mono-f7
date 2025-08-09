@@ -6,11 +6,8 @@
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"]
     },
-    "web#build": {
-      "outputs": [".next/**", "!.next/cache/**"]
-    },
-    "docs#build": {
-      "outputs": [".next/**", "!.next/cache/**"]
+    "store#build": {
+      "outputs": [".output/**"]
     },
     "server#build": {
       "outputs": []
@@ -32,6 +29,21 @@
       "persistent": true
     },
     "clean": {
+      "cache": false
+    },
+    "docker:build": {
+      "dependsOn": ["build"],
+      "inputs": ["Dockerfile", "$TURBO_DEFAULT$"],
+      "cache": false
+    },
+    "server#docker:build": {
+      "dependsOn": ["server#build"],
+      "inputs": ["apps/server/Dockerfile", "$TURBO_DEFAULT$"],
+      "cache": false
+    },
+    "store#docker:build": {
+      "dependsOn": ["store#build"],
+      "inputs": ["apps/store/Dockerfile", "$TURBO_DEFAULT$"],
       "cache": false
     }
   }

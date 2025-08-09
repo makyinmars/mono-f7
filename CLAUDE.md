@@ -20,7 +20,7 @@ This is a Turborepo monorepo with two applications and shared packages:
 
 - **Package Manager**: Bun (v1.2.19+)
 - **Node Version**: >=22
-- **Runtime**: Uses Bun for the server app, Node.js for Next.js apps
+- **Runtime**: Uses Bun for the server app, Node.js for TanStack Start app
 
 ## Common Development Commands
 
@@ -59,6 +59,19 @@ turbo check-types
 bun run clean
 # or
 turbo clean
+
+# Build all Docker images
+bun run docker:build
+# or
+turbo run docker:build
+
+# Build individual Docker images
+bun run docker:build:server  # (when Dockerfile exists)
+bun run docker:build:store
+
+# Run Docker containers
+bun run docker:run:server    # (when Dockerfile exists)
+bun run docker:run:store     # http://localhost:3000
 ```
 
 ### Single App Development
@@ -98,14 +111,22 @@ turbo gen react-component
 
 ### Build Configuration
 
-- Next.js apps use Turbopack for development (`--turbopack` flag)
+- TanStack Start app uses Vite for development with Bun target
 - Server app uses Bun's hot reload (`bun run --hot`)
 - Turbo handles task orchestration and caching
+- Docker builds use multi-stage builds for production optimization
 
 ### Shared Components
 
 - UI components are in `packages/ui/src/` with direct exports via `./src/*.tsx`
-- Components use 'use client' directive for Next.js App Router compatibility
+- Components use 'use client' directive for TanStack Start compatibility
+
+### Docker Configuration
+
+- Store app has Bun-optimized Dockerfile with multi-stage build
+- Uses `oven/bun:alpine` base image for minimal footprint
+- Docker commands integrated with Turbo for orchestrated builds
+- Production containers run with non-root user for security
 
 ### TypeScript Configuration
 

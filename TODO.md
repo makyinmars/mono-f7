@@ -61,15 +61,16 @@
 
 ### Containerization
 
-- [ ] **Docker Setup with Bun**
-  - [ ] Create Dockerfile for web app (Bun-optimized)
-  - [ ] Create Dockerfile for docs app
+- [x] **Docker Setup with Bun** 🚧 *IN PROGRESS*
+  - [x] Create Dockerfile for store app (Bun-optimized)
+  - [x] Setup multi-stage builds for production
+  - [x] Configure Docker commands in package.json and turbo.json
   - [ ] Create Dockerfile for server app
   - [ ] Setup docker-compose.yml for local development
-  - [ ] Configure multi-stage builds for production
   - [ ] Add .dockerignore files
   - [ ] Setup Docker health checks
   - *Complexity: Medium*
+  - *Status: Store app Dockerfile completed with Bun optimization*
 
 ## 📦 Priority 2 - Development Experience
 
@@ -187,14 +188,14 @@
 mono-f7/
 ├── apps/
 │   ├── server/    # API server (Bun + Hono)
-│   └── store/     # TanStack Start app ✅
+│   └── store/     # TanStack Start app ✅ (+ Dockerfile 🐳)
 ├── packages/
 │   ├── ui/        # Shared components
 │   ├── typescript-config/
 │   ├── api/       # [TO CREATE] tRPC API
 │   ├── auth/      # [TO CREATE] Better Auth
 │   └── db/        # [TO CREATE] Drizzle ORM
-└── [Docker files] # [TO CREATE]
+└── docker-compose.yml # [TO CREATE]
 ```
 
 ### Resources
@@ -207,6 +208,21 @@ mono-f7/
 - [Better Auth](https://www.better-auth.com/)
 - [Docker + Bun Guide](https://bun.sh/guides/ecosystem/docker)
 
+### Docker Commands
+
+```bash
+# Build all Docker images
+bun run docker:build
+
+# Build individual images
+bun run docker:build:server  # [when Dockerfile created]
+bun run docker:build:store
+
+# Run containers
+bun run docker:run:server    # [when Dockerfile created]
+bun run docker:run:store     # http://localhost:3000
+```
+
 ### Getting Started
 
 1. Review and prioritize tasks based on project needs
@@ -217,4 +233,5 @@ mono-f7/
 ---
 *Last Updated: 2025-08-09*
 *TanStack Start completed - Store app now running*
+*Docker containerization started - Store app Dockerfile with Bun optimization*
 

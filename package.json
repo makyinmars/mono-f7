@@ -8,7 +8,12 @@
     "format": "turbo run format",
     "format:unsafe": "turbo run format:unsafe",
     "check-types": "turbo run check-types",
-    "clean": "turbo run clean"
+    "clean": "turbo run clean",
+    "docker:build": "turbo run docker:build",
+    "docker:build:server": "docker build -t mono-f7-server -f apps/server/Dockerfile .",
+    "docker:build:store": "docker build -t mono-f7-store -f apps/store/Dockerfile .",
+    "docker:run:server": "docker run -p 3005:3005 mono-f7-server",
+    "docker:run:store": "docker run -p 3000:3000 mono-f7-store"
   },
   "devDependencies": {
     "@biomejs/biome": "2.1.2",
