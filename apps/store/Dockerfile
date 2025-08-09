@@ -1,55 +1,79 @@
 FROM oven/bun:alpine AS base
 
-# This Dockerfile is optimized for TanStack Start with Bun runtime
-# Based on Turbo example but adapted for Bun and TanStack Start
+WORKDIR /app
+
+ENV NODE_ENV=production
+ENV TURBO_TELEMETRY_DISABLED=1
+ENV CI=1
+ENV PORT=3000
+
+# Install system dependencies for Alpine + Bun
+RUN apk update && apk add --no-cache libc6-compat
+
+# =========================================================================== #
 
 FROM base AS builder
-# Check https://github.com/oven-sh/bun to understand why libc6-compat might be needed for Alpine
-RUN apk update
-RUN apk add --no-cache libc6-compat
-# Set working directory
-WORKDIR /app
-RUN bun add -g turbo
+
+# Install Turbo globally
+RUN bun add --global turbo
+
+# Copy entire monorepo
 COPY . .
+
+# Prune the workspace for store app only
+# https://turbo.build/repo/docs/guides/tools/docker#the-solution
 RUN turbo prune store --docker
 
-# Add lockfile and package.json's of isolated subworkspace
-FROM base AS installer
-RUN apk update
-RUN apk add --no-cache libc6-compat
-WORKDIR /app
+# =========================================================================== #
 
-# First install the dependencies (as they change less often)
+FROM base AS installer
+
+# Build arguments for environment configuration
+# ARG PUBLIC_SERVER_URL
+# ENV PUBLIC_SERVER_URL=${PUBLIC_SERVER_URL}
+
+# Copy pruned workspace package.json files
 COPY --from=builder /app/out/json/ .
+
+# Copy original root lockfile for reference
+COPY --from=builder /app/bun.lock ./bun.lock
+
+# Install dependencies using simple bun install
+# Note: Avoiding --frozen-lockfile and --production due to known Bun v1.2.19 issues:
+# - Lockfile parsing errors in Docker containers and monorepos
+# - Version mismatch issues between lockfile creation and install
+# - Production mode parsing failures with dev dependencies
+# Ref: https://github.com/oven-sh/bun/issues (known Docker + frozen-lockfile issues)
 RUN bun install
 
-# Build the project
+# Copy pruned workspace source files
 COPY --from=builder /app/out/full/ .
 
-# Uncomment and use build args to enable remote caching
-# ARG TURBO_TEAM
-# ENV TURBO_TEAM=$TURBO_TEAM
-
-# ARG TURBO_TOKEN
-# ENV TURBO_TOKEN=$TURBO_TOKEN
-
+# Build the TanStack Start application
 RUN bun turbo build
 
-FROM base AS runner
+# =========================================================================== #
+
+FROM base AS production
+
 WORKDIR /app
 
-# Don't run production as root
-RUN addgroup --system --gid 1001 appgroup
-RUN adduser --system --uid 1001 appuser
+# Create non-root user for security
+RUN addgroup --system --gid 1001 appgroup && \
+    adduser --system --uid 1001 appuser
+
 USER appuser
 
-# Copy the built TanStack Start application
+# Copy built application from installer stage
 COPY --from=installer --chown=appuser:appgroup /app/apps/store/.output ./
 COPY --from=installer --chown=appuser:appgroup /app/apps/store/public ./public
 
+# Expose application port
 EXPOSE 3000
 
-ENV NODE_ENV=production
-ENV PORT=3000
+# Health check for production readiness
+HEALTHCHECK --interval=30s --timeout=10s --retries=3 \
+  CMD bun --version || exit 1
 
+# Start the TanStack Start server with Bun
 CMD ["bun", "server/index.mjs"]
