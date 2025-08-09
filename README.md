@@ -1,136 +1,198 @@
-# Turborepo starter
+# mono-f7
 
-This Turborepo starter is maintained by the Turborepo core team.
+A modern full-stack monorepo built with cutting-edge technologies for scalable web applications. This repository demonstrates the power of combining TanStack Start, tRPC, Drizzle ORM, and Better Auth in a Turborepo structure with Bun as the runtime.
 
-## Using this example
+## 🚀 Vision
 
-Run the following command:
+This project aims to be a comprehensive example of modern web development practices, featuring:
 
-```sh
-npx create-turbo@latest
+- **Type-safe full-stack development** with tRPC and TypeScript
+- **Modern React patterns** with TanStack Start for server-side rendering
+- **Database-first approach** with Drizzle ORM and PostgreSQL
+- **Secure authentication** with Better Auth and OAuth providers
+- **Containerized deployment** with Docker and Bun optimization
+- **Production-ready CI/CD** with comprehensive testing and monitoring
+
+## 📦 What's Inside
+
+### Applications
+
+- **`web`** - Next.js application (main web app) on port 3000
+- **`docs`** - Next.js documentation site on port 3001  
+- **`server`** - Hono API server with Bun runtime on port 3005
+- **`start-basic`** - TanStack Start application for SSR/SSG capabilities
+
+### Packages
+
+#### Current
+- **`@repo/ui`** - Shared React component library with shadcn/ui
+- **`@repo/typescript-config`** - Centralized TypeScript configurations
+
+#### Planned (See [TODO.md](./TODO.md))
+- **`@repo/api`** - tRPC API layer with type-safe procedures
+- **`@repo/auth`** - Better Auth authentication system
+- **`@repo/db`** - Drizzle ORM database layer
+
+### Tech Stack
+
+- **Runtime**: [Bun](https://bun.sh/) for server apps, Node.js for Next.js apps
+- **Framework**: Next.js, TanStack Start, Hono
+- **Database**: PostgreSQL with [Drizzle ORM](https://orm.drizzle.team/)
+- **Authentication**: [Better Auth](https://www.better-auth.com/) with OAuth support
+- **API**: [tRPC](https://trpc.io/) for end-to-end type safety
+- **UI**: [Tailwind CSS v4](https://tailwindcss.com/) with [shadcn/ui](https://ui.shadcn.com/)
+- **Package Manager**: Bun workspaces with catalog feature
+- **Build Tool**: [Turborepo](https://turbo.build/repo) for monorepo orchestration
+- **Code Quality**: [Ultracite](https://github.com/bombshell-dev/ultracite) for linting and formatting
+- **Containerization**: Docker with Bun-optimized images
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- **Bun** v1.2.19+ (recommended package manager and runtime)
+- **Node.js** v22+ (for Next.js apps)
+- **PostgreSQL** (for database, can be run via Docker)
+
+### Installation
+
+Clone the repository and install dependencies:
+
+```bash
+git clone <repository-url>
+cd mono-f7
+bun install
 ```
 
-## What's inside?
+### Development
 
-This Turborepo includes the following packages/apps:
+Start all applications in development mode:
 
-### Apps and Packages
+```bash
+# Start all apps simultaneously
+bun run dev
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+# Or with Turbo directly
+turbo dev
+```
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+Start individual applications:
 
-### Utilities
+```bash
+# Next.js web app (port 3000)
+turbo dev --filter=web
 
-This Turborepo has some additional tools already setup for you:
+# Next.js docs site (port 3001)  
+turbo dev --filter=docs
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+# Hono server (port 3005)
+turbo dev --filter=server
+
+# TanStack Start app 
+turbo dev --filter=start-basic
+```
 
 ### Build
 
-To build all apps and packages, run the following command:
+Build all applications and packages:
 
-```
-cd my-turborepo
+```bash
+# Build everything
+bun run build
 
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build
-yarn dlx turbo build
-pnpm exec turbo build
+# Build specific app
+turbo build --filter=web
 ```
 
-You can build a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+### Code Quality
 
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build --filter=docs
+The project uses Ultracite for linting and formatting:
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build --filter=docs
-yarn exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-```
+```bash
+# Lint all code
+bun run lint
 
-### Develop
+# Format all code  
+bun run format
 
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev
-yarn exec turbo dev
-pnpm exec turbo dev
+# Type check all packages
+bun run check-types
 ```
 
-You can develop a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+## 🗺️ Roadmap
+
+This project follows a structured development approach with clear priorities. See [TODO.md](./TODO.md) for the complete roadmap.
+
+### Current Status
+- ✅ Turborepo monorepo structure
+- ✅ Next.js applications (web, docs)
+- ✅ Hono API server with Bun
+- ✅ TanStack Start integration
+- ✅ shadcn/ui component library
+- ✅ Ultracite linting and formatting
+
+### Next Milestones
+1. **Core Infrastructure** - tRPC API, Drizzle ORM, Better Auth, Docker setup
+2. **Development Experience** - Testing framework, CI/CD, environment management  
+3. **Production Ready** - Monitoring, deployment, performance optimization
+4. **Enhancements** - Advanced UI patterns, developer tools, analytics
+
+## 🏗️ Project Structure
 
 ```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev --filter=web
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev --filter=web
-yarn exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
+mono-f7/
+├── apps/
+│   ├── web/          # Next.js main application
+│   ├── docs/         # Next.js documentation site  
+│   ├── server/       # Hono API server (Bun)
+│   └── start-basic/  # TanStack Start application
+├── packages/
+│   ├── ui/           # Shared React components
+│   └── typescript-config/ # TypeScript configurations
+├── TODO.md           # Comprehensive development roadmap
+└── CLAUDE.md         # AI assistant instructions
 ```
 
-### Remote Caching
+## 🚢 Deployment
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+### Development
+All applications run locally with hot reload enabled:
+- Web app: http://localhost:3000
+- Docs: http://localhost:3001  
+- Server API: http://localhost:3005
 
-Turborepo can use a technique known as [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+### Production (Planned)
+- **Frontend**: Vercel deployment for Next.js apps
+- **Backend**: Docker containers on Railway/Fly.io
+- **Database**: PostgreSQL with automated backups
+- **CDN**: Static assets via Vercel Edge Network
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
+## 🤝 Contributing
 
-```
-cd my-turborepo
+This project serves as a reference implementation for modern full-stack development. Contributions that align with the roadmap in [TODO.md](./TODO.md) are welcome.
 
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo login
+### Development Workflow
+1. Install dependencies: `bun install`
+2. Start development servers: `bun run dev`
+3. Make changes following existing patterns
+4. Run quality checks: `bun run lint && bun run check-types`
+5. Test your changes across all affected applications
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo login
-yarn exec turbo login
-pnpm exec turbo login
-```
+## 📚 Resources
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+### Core Technologies
+- [Turborepo Documentation](https://turbo.build/repo/docs)
+- [Bun Runtime](https://bun.sh/docs)
+- [TanStack Start](https://tanstack.com/start/latest)
+- [tRPC](https://trpc.io/)
+- [Drizzle ORM](https://orm.drizzle.team/)
+- [Better Auth](https://www.better-auth.com/)
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+### Development Tools
+- [shadcn/ui Components](https://ui.shadcn.com/)
+- [Tailwind CSS v4](https://tailwindcss.com/)
+- [Ultracite Linter](https://github.com/bombshell-dev/ultracite)
 
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo link
+## 📄 License
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo link
-yarn exec turbo link
-pnpm exec turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turborepo.com/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.com/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.com/docs/reference/configuration)
-- [CLI Usage](https://turborepo.com/docs/reference/command-line-reference)
-# mono-f7
+This project is open source and available under the [MIT License](LICENSE).
