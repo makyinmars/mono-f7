@@ -14,6 +14,9 @@
       },
       "style": {
         "noHeadElement": "off"
+      },
+      "performance": {
+        "noNamespaceImport": "off"
       }
     },
     "includes": ["**", "!**/routeTree.gen.ts"]

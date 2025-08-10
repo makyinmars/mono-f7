@@ -1,6 +1,8 @@
 {
   "$schema": "https://turborepo.com/schema.json",
+  "globalDependencies": ["**/.env"],
   "ui": "tui",
+  "globalEnv": ["DATABASE_URL"],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
@@ -44,6 +46,19 @@
     "store#docker:build": {
       "dependsOn": ["store#build"],
       "inputs": ["apps/store/Dockerfile", "$TURBO_DEFAULT$"],
+      "cache": false
+    },
+    "db:push": {
+      "cache": false
+    },
+    "db:studio": {
+      "cache": false,
+      "persistent": true
+    },
+    "db:generate": {
+      "cache": false
+    },
+    "db:migrate": {
       "cache": false
     }
   }

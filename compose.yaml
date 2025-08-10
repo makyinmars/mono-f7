@@ -1,0 +1,20 @@
+services:
+  db:
+    image: docker.io/postgres:latest
+    ports:
+      - 5432:5432
+    command: ['postgres', '-c', 'log_statement=all']
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=mono_f7
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      test: ['CMD', 'pg_isready', '-U', 'postgres', '-d', 'mono_f7']
+
+volumes:
+  postgres_data:
