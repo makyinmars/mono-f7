@@ -17,7 +17,7 @@ This project aims to be a comprehensive example of modern web development practi
 
 ### Applications
 
-- **`server`** - Hono API server with Bun runtime on port 3005
+- **`server`** - Hono API server with Bun runtime on port 3035
 - **`store`** - TanStack Start application with file-based routing for SSR/SSG capabilities
 
 ### Packages
@@ -62,6 +62,33 @@ cd mono-f7
 bun install
 ```
 
+### Environment Variables
+
+This project follows Turborepo best practices for environment variables by using **package-specific .env files** instead of a root-level configuration. This prevents environment variable leakage across applications and improves cache efficiency.
+
+#### Setup Environment Files
+
+Copy the example files and configure them for your environment:
+
+```bash
+# Server environment variables
+cp apps/server/.env.example apps/server/.env
+
+# Store environment variables  
+cp apps/store/.env.example apps/store/.env
+
+# Database environment variables (for migrations)
+cp packages/db/.env.example packages/db/.env
+```
+
+#### Configuration Structure
+
+- **`apps/server/.env`** - Server-specific variables (database URL, auth secrets, API settings)
+- **`apps/store/.env`** - Frontend-specific variables (API URLs, public configuration)
+- **`packages/db/.env`** - Database package variables (used by Drizzle migrations and studio)
+
+Each package includes Zod-based environment validation to ensure type safety and proper configuration.
+
 ### Development
 
 Start all applications in development mode:
@@ -77,7 +104,7 @@ turbo dev
 Start individual applications:
 
 ```bash
-# Hono server (port 3005)
+# Hono server (port 3035)
 turbo dev --filter=server
 
 # TanStack Start app
@@ -165,7 +192,7 @@ mono-f7/
 ### Development
 All applications run locally with hot reload enabled:
 - Store app: http://localhost:3000 (TanStack Start)
-- Server API: http://localhost:3005
+- Server API: http://localhost:3035
 
 ### Production (Planned)
 - **Frontend**: Vercel deployment for TanStack Start app

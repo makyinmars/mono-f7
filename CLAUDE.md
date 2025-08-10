@@ -8,13 +8,16 @@ This is a Turborepo monorepo with two applications and shared packages:
 
 ### Applications
 
-- **server** - Bun/Hono API server on port 3005
+- **server** - Bun/Hono API server on port 3035
 - **store** - TanStack Start app with file-based routing for SSR/SSG capabilities
 
 ### Packages
 
 - **@repo/ui** - Shared React component library
 - **@repo/typescript-config** - Shared TypeScript configurations
+- **@repo/api** - tRPC API layer with type-safe procedures
+- **@repo/auth** - Better Auth authentication system with Drizzle adapter
+- **@repo/db** - Drizzle ORM database layer with PostgreSQL
 
 ## Package Manager & Runtime
 
@@ -133,4 +136,30 @@ turbo gen react-component
 - Shared configs in `packages/typescript-config/`
 - Base config uses strict mode with modern ES2022 target
 - NodeNext module resolution for better ESM compatibility
+
+### Environment Variables Configuration
+
+This project follows Turborepo best practices for environment variable management:
+
+- **Package-specific .env files** - No root-level .env file to prevent variable leakage
+- **Environment validation** - Each package uses Zod for type-safe environment validation
+- **Turborepo configuration** - Environment variables are specified per task in `turbo.json`
+
+#### File Structure
+```
+apps/server/.env          # Server-specific variables (DATABASE_URL, SERVER_*, PUBLIC_WEB_URL)
+apps/store/.env           # Frontend-specific variables (PUBLIC_*, VITE_*)
+packages/db/.env          # Database package variables (DATABASE_URL for migrations)
+```
+
+#### Environment Files
+- `apps/server/src/env.ts` - Zod schema for server environment validation
+- `apps/store/src/env.ts` - Zod schema for store environment validation  
+- `packages/db/src/env.ts` - Zod schema for database environment validation
+
+#### Turborepo Configuration
+Each task in `turbo.json` specifies required environment variables:
+- Server tasks: `["DATABASE_URL", "SERVER_*", "PUBLIC_WEB_URL"]`
+- Store tasks: `["PUBLIC_*", "VITE_*"]`
+- Database tasks: `["DATABASE_URL"]`
 

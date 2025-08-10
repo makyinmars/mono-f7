@@ -1,0 +1,5 @@
+{
+  "extends": "@repo/typescript-config/internal-bundler.json",
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
+}

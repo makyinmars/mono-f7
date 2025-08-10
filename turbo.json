@@ -1,18 +1,18 @@
 {
   "$schema": "https://turborepo.com/schema.json",
-  "globalDependencies": ["**/.env"],
   "ui": "tui",
-  "globalEnv": ["DATABASE_URL"],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"]
     },
     "store#build": {
-      "outputs": [".output/**"]
+      "outputs": [".output/**"],
+      "env": ["PUBLIC_*", "VITE_*"]
     },
     "server#build": {
-      "outputs": []
+      "outputs": [],
+      "env": ["DATABASE_URL", "SERVER_*", "PUBLIC_WEB_URL"]
     },
     "lint": {
       "dependsOn": ["^lint"]
@@ -29,6 +29,16 @@
     "dev": {
       "cache": false,
       "persistent": true
+    },
+    "server#dev": {
+      "cache": false,
+      "persistent": true,
+      "env": ["DATABASE_URL", "SERVER_*", "PUBLIC_WEB_URL"]
+    },
+    "store#dev": {
+      "cache": false,
+      "persistent": true,
+      "env": ["PUBLIC_*", "VITE_*"]
     },
     "clean": {
       "cache": false
@@ -49,17 +59,21 @@
       "cache": false
     },
     "db:push": {
-      "cache": false
+      "cache": false,
+      "env": ["DATABASE_URL"]
     },
     "db:studio": {
       "cache": false,
-      "persistent": true
+      "persistent": true,
+      "env": ["DATABASE_URL"]
     },
     "db:generate": {
-      "cache": false
+      "cache": false,
+      "env": ["DATABASE_URL"]
     },
     "db:migrate": {
-      "cache": false
+      "cache": false,
+      "env": ["DATABASE_URL"]
     }
   }
 }

@@ -78,13 +78,15 @@
 
 ### Environment Configuration
 
-- [x] **Environment Variables Management** 🚧 *PARTIAL*
-  - [x] Setup `.env.example` files for each app
-  - [ ] Configure environment validation with Zod
-  - [ ] Setup T3 Env for type-safe environment variables
-  - [x] Document all required environment variables
+- [x] **Environment Variables Management** ✅ *COMPLETED*
+  - [x] Setup package-specific `.env` files following Turborepo best practices
+  - [x] Configure environment validation with Zod in each package
+  - [x] Remove root-level `.env` file to prevent variable leakage
+  - [x] Update `turbo.json` with environment variable configuration per task
+  - [x] Document all required environment variables with `.env.example` files
+  - [x] Update `.gitignore` to properly ignore package-specific `.env` files
   - *Complexity: Low*
-  - *Status: Basic .env.example files created, need validation setup*
+  - *Status: Complete implementation following Turborepo best practices with Zod validation*
 
 ### Testing Infrastructure
 
@@ -238,5 +240,5 @@ bun run docker:run:store     # http://localhost:3000
 *Database package completed - PostgreSQL + Drizzle ORM with auth/todo schemas*
 *Auth package completed - Better Auth with Drizzle adapter and consistent TypeScript config*
 *Docker Compose setup for local PostgreSQL development*
-*Environment configuration with .env.example files*
+*Environment variables completed - Package-specific .env files with Turborepo best practices and Zod validation*
 

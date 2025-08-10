@@ -7,16 +7,21 @@
         "useHtmlLang": "off"
       },
       "nursery": {
-        "noUnknownAtRule": "off"
+        "noUnknownAtRule": "off",
+        "useNumericSeparators": "off"
       },
       "correctness": {
         "noInvalidPositionAtImportRule": "off"
       },
       "style": {
-        "noHeadElement": "off"
+        "noHeadElement": "off",
+        "noEnum": "off"
       },
       "performance": {
         "noNamespaceImport": "off"
+      },
+      "suspicious": {
+        "noConsole": "off"
       }
     },
     "includes": ["**", "!**/routeTree.gen.ts"]

@@ -31,7 +31,7 @@
     "autoprefixer": "^10.4.20",
     "tailwindcss": "catalog:",
     "typescript": "catalog:",
-    "vite": "^6.3.5",
+    "vite": "catalog:",
     "vite-tsconfig-paths": "^5.1.4"
   }
 }
