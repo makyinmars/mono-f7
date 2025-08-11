@@ -14,6 +14,30 @@
         "ultracite": "5.1.2",
       },
     },
+    "apps/admin": {
+      "name": "admin",
+      "dependencies": {
+        "@repo/ui": "*",
+        "@tanstack/react-router": "^1.131.2",
+        "@tanstack/react-router-devtools": "^1.131.2",
+        "@tanstack/react-start": "^1.131.2",
+        "react": "catalog:",
+        "react-dom": "catalog:",
+        "zod": "catalog:",
+      },
+      "devDependencies": {
+        "@repo/typescript-config": "*",
+        "@types/node": "^22.15.3",
+        "@types/react": "catalog:",
+        "@types/react-dom": "catalog:",
+        "@vitejs/plugin-react": "^4.6.0",
+        "autoprefixer": "^10.4.20",
+        "tailwindcss": "catalog:",
+        "typescript": "catalog:",
+        "vite": "catalog:",
+        "vite-tsconfig-paths": "^5.1.4",
+      },
+    },
     "apps/server": {
       "name": "server",
       "dependencies": {
@@ -717,6 +741,8 @@
     "acorn": ["acorn@8.15.0", "", { "bin": { "acorn": "bin/acorn" } }, "sha512-NZyJarBfL7nWwIq+FDL6Zp/yHEhePMNnnJ0y3qfieCrmNvYct8uvtiV41UvlSe6apAfk0fY1FbWx+NwfmpvtTg=="],
 
     "acorn-import-attributes": ["acorn-import-attributes@1.9.5", "", { "peerDependencies": { "acorn": "^8" } }, "sha512-n02Vykv5uA3eHGM/Z2dQrcD56kL8TyDb2p1+0P83PClMnC/nc+anbQRhIOWnSq4Ke/KvDPrY3C9hDtC/A3eHnQ=="],
+
+    "admin": ["admin@workspace:apps/admin"],
 
     "agent-base": ["agent-base@7.1.4", "", {}, "sha512-MnA+YT8fwfJPgBx3m60MNqakm30XOkyIoH1y6huTQvC0PwZG7ki8NacLBcrPbNoo8vEZy7Jpuk7+jMO+CUovTQ=="],
 

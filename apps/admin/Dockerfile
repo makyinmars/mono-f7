@@ -5,7 +5,7 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV TURBO_TELEMETRY_DISABLED=1
 ENV CI=1
-ENV PORT=3035
+ENV PORT=3000
 
 # Install system dependencies for Alpine + Bun
 RUN apk update && apk add --no-cache libc6-compat
@@ -20,27 +20,17 @@ RUN bun add --global turbo
 # Copy entire monorepo
 COPY . .
 
-# Prune the workspace for server app only
+# Prune the workspace for admin app only
 # https://turbo.build/repo/docs/guides/tools/docker#the-solution
-RUN turbo prune server --docker
+RUN turbo prune admin --docker
 
 # =========================================================================== #
 
 FROM base AS installer
 
 # Build arguments for environment configuration
-ARG DATABASE_URL
-ARG SERVER_PORT=3035
-ARG SERVER_HOST=localhost
-ARG SERVER_AUTH_SECRET
-ARG PUBLIC_WEB_URL
-
-# Convert build args to environment variables
-ENV DATABASE_URL=${DATABASE_URL}
-ENV SERVER_PORT=${SERVER_PORT}
-ENV SERVER_HOST=${SERVER_HOST}
-ENV SERVER_AUTH_SECRET=${SERVER_AUTH_SECRET}
-ENV PUBLIC_WEB_URL=${PUBLIC_WEB_URL}
+# ARG PUBLIC_SERVER_URL
+# ENV PUBLIC_SERVER_URL=${PUBLIC_SERVER_URL}
 
 # Copy pruned workspace package.json files
 COPY --from=builder /app/out/json/ .
@@ -59,7 +49,7 @@ RUN bun install
 # Copy pruned workspace source files
 COPY --from=builder /app/out/full/ .
 
-# Run type checking for the server application
+# Build the TanStack Start application
 RUN bun turbo build
 
 # =========================================================================== #
@@ -74,15 +64,16 @@ RUN addgroup --system --gid 1001 appgroup && \
 
 USER appuser
 
-# Copy server application source from installer stage
-COPY --from=installer --chown=appuser:appgroup /app/apps/server ./
+# Copy built application from installer stage
+COPY --from=installer --chown=appuser:appgroup /app/apps/admin/.output ./
+COPY --from=installer --chown=appuser:appgroup /app/apps/admin/public ./public
 
 # Expose application port
-EXPOSE 3035
+EXPOSE 3000
 
 # Health check for production readiness
 HEALTHCHECK --interval=30s --timeout=10s --retries=3 \
   CMD bun --version || exit 1
 
-# Start the Hono server with Bun
-CMD ["bun", "src/index.ts"]
+# Start the TanStack Start server with Bun
+CMD ["bun", "server/index.mjs"]

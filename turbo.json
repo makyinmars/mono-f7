@@ -10,6 +10,10 @@
       "outputs": [".output/**"],
       "env": ["PUBLIC_*", "VITE_*"]
     },
+    "admin#build": {
+      "outputs": [".output/**"],
+      "env": ["PUBLIC_*", "VITE_*"]
+    },
     "server#build": {
       "outputs": [],
       "env": ["DATABASE_URL", "SERVER_*", "PUBLIC_WEB_URL"]
@@ -40,6 +44,11 @@
       "persistent": true,
       "env": ["PUBLIC_*", "VITE_*"]
     },
+    "admin#dev": {
+      "cache": false,
+      "persistent": true,
+      "env": ["PUBLIC_*", "VITE_*"]
+    },
     "clean": {
       "cache": false
     },
@@ -56,6 +65,11 @@
     "store#docker:build": {
       "dependsOn": ["store#build"],
       "inputs": ["apps/store/Dockerfile", "$TURBO_DEFAULT$"],
+      "cache": false
+    },
+    "admin#docker:build": {
+      "dependsOn": ["admin#build"],
+      "inputs": ["apps/admin/Dockerfile", "$TURBO_DEFAULT$"],
       "cache": false
     },
     "db:push": {

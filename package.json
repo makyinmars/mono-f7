@@ -16,8 +16,10 @@
     "docker:build": "turbo run docker:build",
     "docker:build:server": "docker build -t mono-f7-server -f apps/server/Dockerfile .",
     "docker:build:store": "docker build -t mono-f7-store -f apps/store/Dockerfile .",
+    "docker:build:admin": "docker build -t mono-f7-admin -f apps/admin/Dockerfile .",
     "docker:run:server": "docker run -p 3005:3005 mono-f7-server",
-    "docker:run:store": "docker run -p 3000:3000 mono-f7-store"
+    "docker:run:store": "docker run -p 3000:3000 mono-f7-store",
+    "docker:run:admin": "docker run -p 3001:3001 mono-f7-admin"
   },
   "devDependencies": {
     "@biomejs/biome": "2.1.2",

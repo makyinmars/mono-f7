@@ -1,0 +1,38 @@
+# Dependencies
+node_modules
+**/node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build outputs
+.output
+dist
+build
+.next
+.turbo
+
+# Development files
+.env.local
+.env.development
+.env.test
+*.log
+.DS_Store
+
+# Git
+.git
+.gitignore
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# Testing
+coverage
+.nyc_output
+
+# Misc
+README.md
+*.md
