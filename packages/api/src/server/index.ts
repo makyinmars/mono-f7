@@ -1,9 +1,12 @@
 import type { AuthInstance } from '@repo/auth/server';
 import type { DatabaseInstance } from '@repo/db/client';
 import todoRouter from './router/todo';
-import { createTRPCContext as createTRPCContextInternal, router } from './trpc';
+import {
+  createTRPCContext as createTRPCContextInternal,
+  createTRPCRouter,
+} from './trpc';
 
-export const appRouter = router({
+export const appRouter = createTRPCRouter({
   posts: todoRouter,
 });
 

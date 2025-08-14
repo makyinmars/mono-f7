@@ -11,7 +11,7 @@ import { TRPCError, type TRPCRouterRecord } from '@trpc/server';
 import { protectedProcedure, publicProcedure } from '../trpc';
 
 const todoRouter = {
-  all: protectedProcedure.query(({ ctx }) => {
+  all: publicProcedure.query(({ ctx }) => {
     return ctx.db.query.todos.findMany({
       columns: {
         id: true,
@@ -140,6 +140,6 @@ const todoRouter = {
         .returning();
       return deleted;
     }),
-} as TRPCRouterRecord;
+} satisfies TRPCRouterRecord;
 
 export default todoRouter;

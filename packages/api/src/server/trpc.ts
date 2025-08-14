@@ -2,6 +2,7 @@ import type { AuthInstance } from '@repo/auth/server';
 import type { DatabaseInstance } from '@repo/db/client';
 import { initTRPC, TRPCError } from '@trpc/server';
 import SuperJSON from 'superjson';
+import { ZodError } from 'zod';
 
 export const createTRPCContext = async ({
   auth,
@@ -26,9 +27,20 @@ export const createTRPCContext = async ({
 
 export const t = initTRPC.context<typeof createTRPCContext>().create({
   transformer: SuperJSON,
+
+  errorFormatter({ shape, error }) {
+    return {
+      ...shape,
+      data: {
+        ...shape.data,
+        zodError:
+          error.cause instanceof ZodError ? error.cause.flatten() : null,
+      },
+    };
+  },
 });
 
-export const router = t.router;
+export const createTRPCRouter = t.router;
 
 const timingMiddleware = t.middleware(async ({ next, path }) => {
   const start = Date.now();

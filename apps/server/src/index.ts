@@ -12,7 +12,7 @@ const trustedOrigins = [env.PUBLIC_WEB_URL].map((url) => new URL(url).origin);
 const wildcardPath = {
   ALL: '*',
   BETTER_AUTH: '/api/auth/*',
-  TRPC: '/trpc/*',
+  TRPC: '/api/trpc/*',
 } as const;
 
 const db = createDb({ databaseUrl: env.DATABASE_URL });
@@ -63,6 +63,7 @@ app.on(['POST', 'GET'], wildcardPath.BETTER_AUTH, (c) =>
 app.use(
   wildcardPath.TRPC,
   trpcServer({
+    endpoint: '/api/trpc',
     router: api.trpcRouter,
     createContext: (c) => api.createTRPCContext({ headers: c.req.headers }),
   })
