@@ -1,6 +1,7 @@
 /// <reference types="vite/client" />
 
 import type { AppRouter } from '@repo/api/server';
+import { Toaster } from '@repo/ui/components/sonner';
 import appCss from '@repo/ui/globals.css?url';
 import type { QueryClient } from '@tanstack/react-query';
 import {
@@ -76,6 +77,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         {children}
         <TanStackRouterDevtools position="bottom-right" />
         <Scripts />
+        <Toaster />
       </body>
     </html>
   );
