@@ -32,8 +32,6 @@ function getUrl() {
   return `${base}/api/trpc`;
 }
 
-console.log('getUrl', getUrl());
-
 export const trpcClient = createTrpcClient({
   serverUrl: getUrl(),
   headers,

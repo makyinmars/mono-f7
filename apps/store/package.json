@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@repo/ui": "*",
+    "@repo/auth": "*",
     "@repo/api": "*",
     "@tanstack/react-router": "catalog:",
     "@tanstack/react-router-devtools": "catalog:",

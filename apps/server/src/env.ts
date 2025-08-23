@@ -19,8 +19,12 @@ export const envSchema = z.object({
   SERVER_AUTH_SECRET: z.string().min(1),
   DATABASE_URL: z.string().min(1),
 
-  // Frontend URL, used to configure trusted origin (CORS)
-  PUBLIC_WEB_URL: z.url(),
+  // Multiple frontend URLs for store and admin apps
+  PUBLIC_URL_STORE: z.string().url(),
+  PUBLIC_URL_ADMIN: z.string().url(),
+
+  // Optional cookie domain for subdomain sharing
+  AUTH_COOKIE_DOMAIN: z.string().optional().default(''),
 });
 
 export const env = envSchema.parse(process.env);

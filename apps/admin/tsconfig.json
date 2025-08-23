@@ -10,6 +10,8 @@
     "paths": {
       "~/*": ["./src/*"]
     },
-    "noEmit": true
+    "noEmit": true,
+    "declaration": false,
+    "declarationMap": false
   }
 }

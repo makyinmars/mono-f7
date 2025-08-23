@@ -23,10 +23,12 @@ This project aims to be a comprehensive example of modern web development practi
 ### Packages
 
 #### Current
+
 - **`@repo/ui`** - Shared React component library with shadcn/ui
 - **`@repo/typescript-config`** - Centralized TypeScript configurations
 
 #### Planned (See [TODO.md](./TODO.md))
+
 - **`@repo/api`** - tRPC API layer with type-safe procedures
 - **`@repo/auth`** - Better Auth authentication system
 - **`@repo/db`** - Drizzle ORM database layer
@@ -74,7 +76,7 @@ Copy the example files and configure them for your environment:
 # Server environment variables
 cp apps/server/.env.example apps/server/.env
 
-# Store environment variables  
+# Store environment variables
 cp apps/store/.env.example apps/store/.env
 
 # Database environment variables (for migrations)
@@ -132,7 +134,7 @@ The project uses Ultracite for linting and formatting:
 # Lint all code
 bun run lint
 
-# Format all code  
+# Format all code
 bun run format
 
 # Type check all packages
@@ -159,6 +161,7 @@ bun run docker:run:store   # http://localhost:3000
 This project follows a structured development approach with clear priorities. See [TODO.md](./TODO.md) for the complete roadmap.
 
 ### Current Status
+
 - ✅ Turborepo monorepo structure
 - ✅ Hono API server with Bun
 - ✅ TanStack Start application with file-based routing
@@ -168,8 +171,9 @@ This project follows a structured development approach with clear priorities. Se
 - 🚧 Docker containerization (store app completed)
 
 ### Next Milestones
+
 1. **Core Infrastructure** - tRPC API, Drizzle ORM, Better Auth, Docker setup
-2. **Development Experience** - Testing framework, CI/CD, environment management  
+2. **Development Experience** - Testing framework, CI/CD, environment management
 3. **Production Ready** - Monitoring, deployment, performance optimization
 4. **Enhancements** - Advanced UI patterns, developer tools, analytics
 
@@ -190,11 +194,14 @@ mono-f7/
 ## 🚢 Deployment
 
 ### Development
+
 All applications run locally with hot reload enabled:
-- Store app: http://localhost:3000 (TanStack Start)
-- Server API: http://localhost:3035
+
+- Store app: <http://localhost:3000> (TanStack Start)
+- Server API: <http://localhost:3035>
 
 ### Production (Planned)
+
 - **Frontend**: Vercel deployment for TanStack Start app
 - **Backend**: Docker containers on Railway/Fly.io
 - **Database**: PostgreSQL with automated backups
@@ -205,6 +212,7 @@ All applications run locally with hot reload enabled:
 This project serves as a reference implementation for modern full-stack development. Contributions that align with the roadmap in [TODO.md](./TODO.md) are welcome.
 
 ### Development Workflow
+
 1. Install dependencies: `bun install`
 2. Start development servers: `bun run dev`
 3. Make changes following existing patterns
@@ -215,6 +223,7 @@ This project serves as a reference implementation for modern full-stack developm
 ## 📚 Resources
 
 ### Core Technologies
+
 - [Turborepo Documentation](https://turbo.build/repo/docs)
 - [Bun Runtime](https://bun.sh/docs)
 - [TanStack Start](https://tanstack.com/start/latest)
@@ -223,6 +232,7 @@ This project serves as a reference implementation for modern full-stack developm
 - [Better Auth](https://www.better-auth.com/)
 
 ### Development Tools
+
 - [shadcn/ui Components](https://ui.shadcn.com/)
 - [Tailwind CSS v4](https://tailwindcss.com/)
 - [Ultracite Linter](https://github.com/bombshell-dev/ultracite)

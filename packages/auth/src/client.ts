@@ -7,6 +7,6 @@ export interface AuthClientOptions {
 export function createAuthClient(options: AuthClientOptions) {
   return createBetterAuthClient({
     baseURL: options.apiBaseUrl,
-    // plugins: [],
+    plugins: [],
   });
 }

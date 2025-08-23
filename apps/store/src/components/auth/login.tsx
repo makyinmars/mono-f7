@@ -17,40 +17,28 @@ import { toast } from 'sonner';
 import { z } from 'zod';
 import { authClient } from '~/clients/auth-client';
 
-const FormSchema = z
-  .object({
-    name: z.string().min(2, 'Name must be at least 2 characters'),
-    email: z.email('Please enter a valid email address'),
-    password: z.string().min(8, 'Password must be at least 8 characters'),
-    confirmPassword: z.string(),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: 'The two passwords do not match.',
-    path: ['confirmPassword'],
-  });
+const FormSchema = z.object({
+  email: z.email('Please enter a valid email address'),
+  password: z.string().min(8, 'Password must be at least 8 characters'),
+});
 
 type FormData = z.infer<typeof FormSchema>;
 
-const Register = () => {
+const Login = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
-    useState(false);
   const navigate = useNavigate();
 
   const form = useForm<FormData>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      name: '',
       email: '',
       password: '',
-      confirmPassword: '',
     },
   });
 
   const onSubmit = async (data: FormData) => {
-    const { error } = await authClient.signUp.email(
+    const { error } = await authClient.signIn.email(
       {
-        name: data.name,
         email: data.email,
         password: data.password,
       },
@@ -71,20 +59,6 @@ const Register = () => {
         className="flex flex-col gap-y-3"
         onSubmit={form.handleSubmit(onSubmit)}
       >
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Full Name</FormLabel>
-              <FormControl>
-                <Input className="mt-1" type="text" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
         <FormField
           control={form.control}
           name="email"
@@ -132,39 +106,6 @@ const Register = () => {
           )}
         />
 
-        <FormField
-          control={form.control}
-          name="confirmPassword"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Confirm Password</FormLabel>
-              <FormControl>
-                <div className="relative flex w-full items-center justify-end">
-                  <Input
-                    className="mt-1"
-                    type={isConfirmPasswordVisible ? 'text' : 'password'}
-                    {...field}
-                  />
-                  <Button
-                    className="absolute mr-2 h-7 w-7 rounded-full"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setIsConfirmPasswordVisible(!isConfirmPasswordVisible);
-                    }}
-                    size="icon"
-                    tabIndex={-1}
-                    type="button"
-                    variant="ghost"
-                  >
-                    {isConfirmPasswordVisible ? <Eye /> : <EyeOff />}
-                  </Button>
-                </div>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
         <Button
           className="mt-3 h-12"
           disabled={form.formState.isSubmitting}
@@ -173,15 +114,19 @@ const Register = () => {
           {form.formState.isSubmitting ? (
             <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Registering...
+              Logging in...
             </>
           ) : (
-            'Register'
+            'Login'
           )}
         </Button>
+
+        <div className="text-center text-muted-foreground text-sm">
+          Don't have an account? Sign up
+        </div>
       </form>
     </Form>
   );
 };
 
-export default Register;
+export default Login;

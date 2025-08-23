@@ -7,7 +7,11 @@ import { cors } from 'hono/cors';
 import { logger } from 'hono/logger';
 import { env } from './env';
 
-const trustedOrigins = [env.PUBLIC_WEB_URL].map((url) => new URL(url).origin);
+// Build trusted origins from both app URLs
+const trustedOrigins = [
+  new URL(env.PUBLIC_URL_STORE).origin,
+  new URL(env.PUBLIC_URL_ADMIN).origin,
+];
 
 const wildcardPath = {
   ALL: '*',
@@ -19,7 +23,9 @@ const db = createDb({ databaseUrl: env.DATABASE_URL });
 const auth = createAuth({
   authSecret: env.SERVER_AUTH_SECRET,
   db,
-  webUrl: env.PUBLIC_WEB_URL,
+  storeUrl: env.PUBLIC_URL_STORE,
+  adminUrl: env.PUBLIC_URL_ADMIN,
+  cookieDomain: env.AUTH_COOKIE_DOMAIN,
 });
 const api = createApi({ auth, db });
 

@@ -5,7 +5,7 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV TURBO_TELEMETRY_DISABLED=1
 ENV CI=1
-ENV PORT=3000
+ENV PORT=3001
 
 # Install system dependencies for Alpine + Bun
 RUN apk update && apk add --no-cache libc6-compat
@@ -29,8 +29,10 @@ RUN turbo prune admin --docker
 FROM base AS installer
 
 # Build arguments for environment configuration
-# ARG PUBLIC_SERVER_URL
-# ENV PUBLIC_SERVER_URL=${PUBLIC_SERVER_URL}
+ARG PUBLIC_API_URL
+
+# Convert build args to environment variables
+ENV PUBLIC_API_URL=${PUBLIC_API_URL}
 
 # Copy pruned workspace package.json files
 COPY --from=builder /app/out/json/ .
@@ -69,7 +71,7 @@ COPY --from=installer --chown=appuser:appgroup /app/apps/admin/.output ./
 COPY --from=installer --chown=appuser:appgroup /app/apps/admin/public ./public
 
 # Expose application port
-EXPOSE 3000
+EXPOSE 3001
 
 # Health check for production readiness
 HEALTHCHECK --interval=30s --timeout=10s --retries=3 \

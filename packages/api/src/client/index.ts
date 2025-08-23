@@ -34,7 +34,6 @@ export interface APIClientOptions {
 }
 
 export const createTrpcClient = ({ serverUrl, headers }: APIClientOptions) => {
-  console.log('serverUrl', serverUrl);
   return createTRPCClient<AppRouter>({
     links: [
       loggerLink({
