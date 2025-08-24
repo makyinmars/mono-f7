@@ -12,9 +12,9 @@ import {
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import type { TRPCOptionsProxy } from '@trpc/tanstack-react-query';
 import type * as React from 'react';
-import { authClient } from '~/clients/auth-client';
 import { DefaultCatchBoundary } from '~/components/default-catch-boundary';
 import NotFound from '~/components/not-found';
+import { currentUserQueryOptions } from '~/fn/auth';
 import { seo } from '~/utils/seo';
 
 export type MyRouterContext = {
@@ -62,23 +62,16 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       { rel: 'icon', href: '/favicon.ico' },
     ],
   }),
-  beforeLoad: async () => {
-    const auth = await authClient.getSession();
-    console.log('auth', auth);
-    // const session = await context.queryClient.ensureQueryData(
-    //   context.trpc.sessions.current.queryOptions()
-    // );
-    //
-    // if (!session) {
-    //   return {
-    //     auth: null,
-    //   };
-    // }
-    //
-    // console.log('session', session);
-    //
+  beforeLoad: async ({ context }) => {
+    const authenticatedUser = await context.queryClient.ensureQueryData(
+      currentUserQueryOptions
+    );
+
     return {
-      auth,
+      auth: {
+        session: authenticatedUser.session,
+        user: authenticatedUser.user,
+      },
     };
   },
   errorComponent: DefaultCatchBoundary,
