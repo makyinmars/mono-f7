@@ -22,13 +22,13 @@
     "docker:run:admin": "docker run -p 3001:3001 mono-f7-admin"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.1.2",
+    "@biomejs/biome": "2.2.0",
     "husky": "^9.1.7",
     "lefthook": "^1.12.2",
     "lint-staged": "^16.1.4",
     "turbo": "^2.5.5",
     "typescript": "catalog:",
-    "ultracite": "5.1.2",
+    "ultracite": "5.1.3",
     "dotenv-cli": "catalog:"
   },
   "engines": {
