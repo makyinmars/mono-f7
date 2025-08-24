@@ -42,13 +42,6 @@ export const createAuth = ({
   // Build trusted origins array
   const trustedOrigins = [new URL(storeUrl).origin, new URL(adminUrl).origin];
 
-  // For production with wildcard support
-  if (cookieDomain) {
-    // Add wildcard pattern for all subdomains
-    trustedOrigins.push(`https://*${cookieDomain}`);
-    trustedOrigins.push(`http://*${cookieDomain}`); // For staging environments
-  }
-
   return betterAuth({
     ...getBaseOptions(db),
     secret: authSecret,
@@ -58,21 +51,6 @@ export const createAuth = ({
         enabled: true,
         maxAge: 5 * 60,
       },
-    },
-    advanced: {
-      // Configure for cross-origin development (localhost different ports)
-      useSecureCookies: false, // false for localhost development
-      defaultCookieAttributes: {
-        sameSite: 'none',
-        secure: false, // set to true in production with HTTPS
-      },
-      // Only enable cross-subdomain cookies in production with a domain
-      ...(cookieDomain && {
-        crossSubDomainCookies: {
-          enabled: true,
-          domain: cookieDomain,
-        },
-      }),
     },
     emailAndPassword: {
       enabled: true,

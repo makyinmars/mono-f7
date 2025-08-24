@@ -1,0 +1,30 @@
+{
+  "name": "@repo/helpers",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "tsc",
+    "build": "tsc --build",
+    "lint": "ultracite lint",
+    "format": "ultracite format",
+    "format:unsafe": "ultracite format --unsafe",
+    "check-types": "tsc --noEmit",
+    "clean": "rm -rf node_modules dist .turbo .cache"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "*",
+    "@types/node": "^22.15.3",
+    "typescript": "catalog:"
+  },
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./src/index.ts"
+    },
+    "./auth": {
+      "types": "./src/auth.ts",
+      "default": "./src/auth.ts"
+    }
+  }
+}

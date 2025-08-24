@@ -1,35 +1,29 @@
 import { createFileRoute, redirect } from '@tanstack/react-router';
-import { authClient } from '~/clients/auth-client';
+import { currentUserQueryOptions } from '~/fn/auth';
 
 export const Route = createFileRoute('/protected')({
-  beforeLoad: async () => {
-    const auth = await authClient.getSession();
-    console.log('auth', auth);
-    // const session = await context.queryClient.ensureQueryData(
-    //   context.trpc.sessions.current.queryOptions()
-    // );
-    //
-    // if (!session) {
-    //   return {
-    //     auth: null,
-    //   };
-    // }
-    //
-    // console.log('session', session);
-    //
-    if (!auth.data?.user) {
+  beforeLoad: async ({ context }) => {
+    const authenticatedUser = await context.queryClient.ensureQueryData(
+      currentUserQueryOptions
+    );
+    if (!authenticatedUser.session) {
       return redirect({
         to: '/',
       });
     }
 
     return {
-      auth,
+      auth: {
+        session: authenticatedUser.session,
+        user: authenticatedUser.user,
+      },
     };
   },
   component: RouteComponent,
 });
 
 function RouteComponent() {
-  return <div>Hello "/protected"!</div>;
+  const { auth } = Route.useRouteContext();
+  console.log('auth', auth);
+  return <div>Hello "/protected"!: {JSON.stringify(auth)}</div>;
 }
