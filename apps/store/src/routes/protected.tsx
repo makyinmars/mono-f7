@@ -1,5 +1,5 @@
+import { UserMenu } from "@apps/store/components/auth/user-menu";
 import { TodoList } from "@apps/store/components/todo/todo-list";
-import { UserMenu } from "@apps/store/components/user-menu";
 import { assertAuthenticated } from "@apps/store/fn/auth";
 import { Separator } from "@repo/ui/components/separator";
 import { createFileRoute, Link } from "@tanstack/react-router";

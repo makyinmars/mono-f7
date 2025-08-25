@@ -37,9 +37,9 @@ export const getCurrentUserFn = createServerFn({
 export const currentUserQueryOptions = queryOptions({
   queryKey: ["currentUser"],
   queryFn: getCurrentUserFn,
-  staleTime: 2 * 60 * 1000, // Cache for 2 minutes (better security)
-  gcTime: 1 * 60 * 1000, // Keep in memory for 1 minute (faster cleanup)
-  retry: true, // Don't retry auth failures
+  staleTime: 30 * 60 * 1000, // Cache for 30 minutes (reduced server load)
+  gcTime: 60 * 60 * 1000, // Keep in memory for 60 minutes
+  retry: false, // Don't retry auth failures
   refetchOnWindowFocus: true, // Revalidate when user returns to tab
   refetchOnReconnect: true, // Revalidate after network reconnection
   networkMode: "offlineFirst", // Use cache when offline
