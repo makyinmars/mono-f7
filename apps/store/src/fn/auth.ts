@@ -39,7 +39,7 @@ export const currentUserQueryOptions = queryOptions({
   queryFn: getCurrentUserFn,
   staleTime: 2 * 60 * 1000, // Cache for 2 minutes (better security)
   gcTime: 10 * 60 * 1000, // Keep in memory for 10 minutes
-  retry: false, // Don't retry auth failures
+  retry: true, // Don't retry auth failures
   refetchOnWindowFocus: true, // Revalidate when user returns to tab
   refetchOnReconnect: true, // Revalidate after network reconnection
   networkMode: 'offlineFirst', // Use cache when offline

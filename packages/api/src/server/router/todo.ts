@@ -9,6 +9,9 @@ import {
 
 import { TRPCError, type TRPCRouterRecord } from '@trpc/server';
 import { protectedProcedure, publicProcedure } from '../trpc';
+import type { RouterOutput } from '../utils';
+
+export type TodoAllProcedure = RouterOutput['todos']['all'];
 
 const todoRouter = {
   all: protectedProcedure.query(({ ctx }) => {

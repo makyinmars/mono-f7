@@ -9,7 +9,6 @@ import {
   FormMessage,
 } from '@repo/ui/components/form';
 import { Input } from '@repo/ui/components/input';
-import { useNavigate } from '@tanstack/react-router';
 import { Eye, EyeOff, Loader2 } from 'lucide-react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -26,7 +25,6 @@ type FormData = z.infer<typeof FormSchema>;
 
 const Login = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const navigate = useNavigate();
 
   const form = useForm<FormData>({
     resolver: zodResolver(FormSchema),
@@ -44,7 +42,7 @@ const Login = () => {
       },
       {
         onSuccess: () => {
-          navigate({ to: '/protected' });
+          window.location.href = '/protected';
         },
       }
     );

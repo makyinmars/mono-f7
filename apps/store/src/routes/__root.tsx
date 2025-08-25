@@ -86,7 +86,6 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body className="flex flex-col gap-4 p-4">
-        <hr />
         {children}
         <TanStackRouterDevtools position="bottom-right" />
         <Scripts />

@@ -1,4 +1,3 @@
-import { useTRPC } from '@repo/api/react';
 import { Button } from '@repo/ui/components/button';
 import {
   Card,
@@ -12,7 +11,6 @@ import {
   TabsList,
   TabsTrigger,
 } from '@repo/ui/components/tabs';
-import { useQuery } from '@tanstack/react-query';
 import { createFileRoute } from '@tanstack/react-router';
 import Login from '~/components/auth/login';
 import Register from '~/components/auth/register';
@@ -21,9 +19,6 @@ export const Route = createFileRoute('/')({
 });
 
 function Home() {
-  const trpc = useTRPC();
-  const todosQuery = useQuery(trpc.posts.all.queryOptions());
-
   return (
     <div className="flex flex-col gap-4 p-4">
       <div className="mb-8">
@@ -66,10 +61,6 @@ function Home() {
       <div className="mt-8">
         <h3>Welcome Store!!!</h3>
         <Button variant={'outline'}>Click me</Button>
-        <div className="mt-4">
-          <h4>Posts:</h4>
-          <pre>{JSON.stringify(todosQuery.data, null, 2)}</pre>
-        </div>
       </div>
     </div>
   );
