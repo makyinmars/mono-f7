@@ -7,7 +7,8 @@
         "useHtmlLang": "off"
       },
       "correctness": {
-        "noInvalidPositionAtImportRule": "off"
+        "noInvalidPositionAtImportRule": "off",
+        "noSolidDestructuredProps": "off"
       },
       "nursery": {
         "useConsistentTypeDefinitions": "off"
@@ -15,19 +16,27 @@
       "style": {
         "noHeadElement": "off",
         "noEnum": "off",
-        "noMagicNumbers": "off",
+        "noMagicNumbers": "off"
       },
       "performance": {
         "noNamespaceImport": "off"
       },
       "suspicious": {
-        "noConsole": "off"
+        "noUnknownAtRules": "off",
+        "noConsole": "off",
+        "noArrayIndexKey": "off"
       },
       "complexity": {
-        "noExcessiveLinesPerFunction": "off"
+        "noExcessiveLinesPerFunction": "off",
+        "noImplicitCoercions": "off"
       }
     },
     "includes": ["**", "!**/routeTree.gen.ts"]
+  },
+  "javascript": {
+    "formatter": {
+      "jsxQuoteStyle": "double"
+    }
   },
   "extends": ["ultracite"]
 }

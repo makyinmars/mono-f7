@@ -1,4 +1,3 @@
-import { Session, User } from '@repo/db/schema';
 import {
   Avatar,
   AvatarFallback,
@@ -13,16 +12,21 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@repo/ui/components/dropdown-menu';
+import { useQueryClient } from '@tanstack/react-query';
+import { useRouter } from '@tanstack/react-router';
 import { LogOut, User as UserIcon } from 'lucide-react';
 import { toast } from 'sonner';
-import { authClient } from '~/clients/auth-client';
+import { type Auth, authClient } from '~/clients/auth-client';
 
 interface UserMenuProps {
-  user: User | null;
-  session: Session | null;
+  auth: Auth | null;
 }
 
-export function UserMenu({ user, session }: UserMenuProps) {
+export function UserMenu({ auth }: UserMenuProps) {
+  const queryClient = useQueryClient();
+  const router = useRouter();
+  const user = auth?.user;
+  const session = auth?.session;
   if (!user) {
     return null;
   }
@@ -36,13 +40,20 @@ export function UserMenu({ user, session }: UserMenuProps) {
       .slice(0, 2);
   };
 
-  const handleLogout = async () => {
+  const handleLogout = () => {
     try {
       toast.promise(
         authClient.signOut({
           fetchOptions: {
-            onSuccess: () => {
-              window.location.href = '/';
+            onSuccess: async () => {
+              // Remove the currentUser query to completely clear cache
+              queryClient.removeQueries({
+                queryKey: ['currentUser'],
+              });
+
+              await router.navigate({
+                to: '/',
+              });
             },
           },
         }),
@@ -53,7 +64,7 @@ export function UserMenu({ user, session }: UserMenuProps) {
         }
       );
     } catch (error) {
-      toast.error('An unexpected error occurred during sign out.');
+      toast.error(`An unexpected error occurred during sign out. ${error}`);
     }
   };
 

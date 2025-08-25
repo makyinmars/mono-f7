@@ -69,8 +69,8 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 
     return {
       auth: {
-        session: authenticatedUser.session,
-        user: authenticatedUser.user,
+        session: authenticatedUser?.session,
+        user: authenticatedUser?.user,
       },
     };
   },

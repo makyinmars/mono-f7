@@ -9,7 +9,7 @@ const createPortSchema = ({ defaultPort }: { defaultPort: number }) =>
     .default(`${defaultPort}`)
     .transform((s) => Number.parseInt(s, 10))
     .refine((n) => Number.isInteger(n), { message: 'Must be an integer' })
-    .refine((n) => n >= 0 && n <= 65535, {
+    .refine((n) => n >= 0 && n <= 65_535, {
       message: 'Port must be between 0 and 65535',
     });
 

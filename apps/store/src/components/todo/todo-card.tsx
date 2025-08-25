@@ -1,3 +1,4 @@
+import type { TodoAllProcedure } from '@repo/api/server';
 import { TodoStatus } from '@repo/db/schema';
 import { Badge } from '@repo/ui/components/badge';
 import {
@@ -7,7 +8,6 @@ import {
   CardTitle,
 } from '@repo/ui/components/card';
 import { Calendar, CheckCircle, Clock, Play } from 'lucide-react';
-import { TodoAllProcedure } from '@repo/api/server';
 
 const statusConfig = {
   [TodoStatus.NOT_STARTED]: {

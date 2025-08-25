@@ -1,7 +1,8 @@
 import { queryOptions } from '@tanstack/react-query';
+import { redirect } from '@tanstack/react-router';
 import { createServerFn } from '@tanstack/react-start';
 import { getHeaders } from '@tanstack/react-start/server';
-import { authClient } from '~/clients/auth-client';
+import { type Auth, authClient } from '~/clients/auth-client';
 
 export const getCurrentUserFn = createServerFn({
   method: 'GET',
@@ -26,11 +27,10 @@ export const getCurrentUserFn = createServerFn({
     return {
       session: auth.data?.session || null,
       user: auth.data?.user || null,
-      error: auth.error || null,
     };
   } catch (error) {
     console.error('Failed to validate session:', error);
-    return { session: null, user: null, error: true };
+    return { session: null, user: null };
   }
 });
 
@@ -38,9 +38,23 @@ export const currentUserQueryOptions = queryOptions({
   queryKey: ['currentUser'],
   queryFn: getCurrentUserFn,
   staleTime: 2 * 60 * 1000, // Cache for 2 minutes (better security)
-  gcTime: 10 * 60 * 1000, // Keep in memory for 10 minutes
+  gcTime: 1 * 60 * 1000, // Keep in memory for 1 minute (faster cleanup)
   retry: true, // Don't retry auth failures
   refetchOnWindowFocus: true, // Revalidate when user returns to tab
   refetchOnReconnect: true, // Revalidate after network reconnection
   networkMode: 'offlineFirst', // Use cache when offline
 });
+
+export const assertAuthenticated = (auth: Auth | null) => {
+  if (!auth) {
+    throw redirect({
+      to: '/',
+    });
+  }
+
+  if (!auth?.user) {
+    throw redirect({
+      to: '/',
+    });
+  }
+};

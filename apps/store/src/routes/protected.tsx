@@ -1,33 +1,21 @@
 import { Separator } from '@repo/ui/components/separator';
-import { createFileRoute, redirect } from '@tanstack/react-router';
+import { createFileRoute, Link } from '@tanstack/react-router';
 import { TodoList } from '~/components/todo/todo-list';
 import { UserMenu } from '~/components/user-menu';
-import { Link } from '@tanstack/react-router';
+import { assertAuthenticated } from '~/fn/auth';
 import { Route as MainRoute } from '../routes/__root';
-import { currentUserQueryOptions } from '~/fn/auth';
 
 export const Route = createFileRoute('/protected')({
-  beforeLoad: async ({ context }) => {
-    const authenticatedUser = await context.queryClient.ensureQueryData(
-      currentUserQueryOptions
-    );
-
-    console.log('authenticatedUser', authenticatedUser);
-
-    if (!authenticatedUser.user) {
-      return redirect({
-        to: '/',
-      });
-    }
+  beforeLoad: ({ context }) => {
+    assertAuthenticated(context.auth);
   },
   component: RouteComponent,
 });
 
 function RouteComponent() {
   const { auth } = MainRoute.useRouteContext();
-  console.log('auth', auth);
   return (
-    <div className="min-h-screen bg-background space-y-4">
+    <div className="min-h-screen space-y-4 bg-background">
       {/* Header */}
       <header className="border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
         <div className="container mx-auto px-4 py-4">
@@ -48,7 +36,7 @@ function RouteComponent() {
               </div>
             </div>
 
-            <UserMenu session={auth.session} user={auth.user} />
+            <UserMenu auth={auth} />
           </div>
         </div>
       </header>

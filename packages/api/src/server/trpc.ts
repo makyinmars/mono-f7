@@ -42,25 +42,7 @@ export const t = initTRPC.context<typeof createTRPCContext>().create({
 
 export const createTRPCRouter = t.router;
 
-const timingMiddleware = t.middleware(async ({ next, path }) => {
-  const start = Date.now();
-  let waitMsDisplay = '';
-  if (t._config.isDev) {
-    // artificial delay in dev 100-500ms
-    const waitMs = Math.floor(Math.random() * 400) + 100;
-    await new Promise((resolve) => setTimeout(resolve, waitMs));
-    waitMsDisplay = ` (artificial delay: ${waitMs}ms)`;
-  }
-  const result = await next();
-  const end = Date.now();
-
-  console.log(
-    `\t[TRPC] /${path} executed after ${end - start}ms${waitMsDisplay}`
-  );
-  return result;
-});
-
-export const publicProcedure = t.procedure.use(timingMiddleware);
+export const publicProcedure = t.procedure;
 
 export const protectedProcedure = publicProcedure.use(({ ctx, next }) => {
   if (!ctx.session?.user) {

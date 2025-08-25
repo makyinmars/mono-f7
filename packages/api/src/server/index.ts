@@ -1,11 +1,10 @@
 import type { AuthInstance } from '@repo/auth/server';
 import type { DatabaseInstance } from '@repo/db/client';
-import todoRouter, { type TodoAllProcedure } from './router/todo';
+import todoRouter from './router/todo';
 import {
   createTRPCContext as createTRPCContextInternal,
   createTRPCRouter,
 } from './trpc';
-import type { RouterOutput } from './utils';
 
 export const appRouter = createTRPCRouter({
   todos: todoRouter,
@@ -26,4 +25,5 @@ export const createApi = ({
 };
 
 export type AppRouter = typeof appRouter;
-export type { TodoAllProcedure, RouterOutput };
+export type { TodoAllProcedure } from './router/todo';
+export type { RouterOutput } from './utils';
