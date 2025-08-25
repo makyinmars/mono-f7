@@ -1,6 +1,7 @@
 {
   "name": "mono-f7",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "dotenv -- turbo run build",
     "dev": "dotenv -- turbo run dev",
