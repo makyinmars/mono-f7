@@ -9,7 +9,7 @@ This is a Turborepo monorepo with three applications and shared packages:
 ### Applications
 
 - **server** - Bun/Hono API server on port 3035
-- **store** - TanStack Start app with file-based routing for SSR/SSG capabilities
+- **store** - TanStack Start store on port 3000
 - **admin** - TanStack Start admin dashboard on port 3001
 
 ### Packages
@@ -22,9 +22,9 @@ This is a Turborepo monorepo with three applications and shared packages:
 
 ## Package Manager & Runtime
 
-- **Package Manager**: Bun (v1.2.19+)
+- **Package Manager**: Bun (v1.2.20+)
 - **Node Version**: >=22
-- **Runtime**: Uses Bun for the server app, Node.js for TanStack Start app
+- **Runtime**: Uses Bun for the server app and for both apps: admin and store
 
 ## Common Development Commands
 
@@ -39,7 +39,7 @@ bun run dev
 # or
 turbo dev
 
-# Build all apps and packages  
+# Build all apps and packages
 bun run build
 # or
 turbo build
@@ -168,7 +168,7 @@ packages/db/.env          # Database package variables (DATABASE_URL for migrati
 
 #### Environment Files
 - `apps/server/src/env.ts` - Zod schema for server environment validation
-- `apps/store/src/env.ts` - Zod schema for store environment validation  
+- `apps/store/src/env.ts` - Zod schema for store environment validation
 - `packages/db/src/env.ts` - Zod schema for database environment validation
 
 #### Turborepo Configuration
@@ -176,4 +176,3 @@ Each task in `turbo.json` specifies required environment variables:
 - Server tasks: `["DATABASE_URL", "SERVER_*", "PUBLIC_WEB_URL"]`
 - Store tasks: `["PUBLIC_*", "VITE_*"]`
 - Database tasks: `["DATABASE_URL"]`
-
