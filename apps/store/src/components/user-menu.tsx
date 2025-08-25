@@ -1,9 +1,10 @@
+import { type Auth, authClient } from "@apps/store/clients/auth-client";
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from '@repo/ui/components/avatar';
-import { Button } from '@repo/ui/components/button';
+} from "@repo/ui/components/avatar";
+import { Button } from "@repo/ui/components/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,12 +12,11 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '@repo/ui/components/dropdown-menu';
-import { useQueryClient } from '@tanstack/react-query';
-import { useRouter } from '@tanstack/react-router';
-import { LogOut, User as UserIcon } from 'lucide-react';
-import { toast } from 'sonner';
-import { type Auth, authClient } from '~/clients/auth-client';
+} from "@repo/ui/components/dropdown-menu";
+import { useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "@tanstack/react-router";
+import { LogOut, User as UserIcon } from "lucide-react";
+import { toast } from "sonner";
 
 interface UserMenuProps {
   auth: Auth | null;
@@ -33,9 +33,9 @@ export function UserMenu({ auth }: UserMenuProps) {
 
   const getInitials = (name: string) => {
     return name
-      .split(' ')
+      .split(" ")
       .map((part) => part.charAt(0))
-      .join('')
+      .join("")
       .toUpperCase()
       .slice(0, 2);
   };
@@ -48,19 +48,19 @@ export function UserMenu({ auth }: UserMenuProps) {
             onSuccess: async () => {
               // Remove the currentUser query to completely clear cache
               queryClient.removeQueries({
-                queryKey: ['currentUser'],
+                queryKey: ["currentUser"],
               });
 
               await router.navigate({
-                to: '/',
+                to: "/",
               });
             },
           },
         }),
         {
-          loading: 'Signing out...',
-          success: 'Signed out successfully!',
-          error: 'Failed to sign out. Please try again.',
+          loading: "Signing out...",
+          success: "Signed out successfully!",
+          error: "Failed to sign out. Please try again.",
         }
       );
     } catch (error) {

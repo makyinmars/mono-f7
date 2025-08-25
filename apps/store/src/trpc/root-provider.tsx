@@ -1,17 +1,17 @@
-import { createTrpcClient } from '@repo/api/client';
-import { TRPCProvider } from '@repo/api/react';
-import type { AppRouter } from '@repo/api/server';
-import { QueryCache, QueryClient } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { createIsomorphicFn, createServerFn } from '@tanstack/react-start';
-import { getWebRequest } from '@tanstack/react-start/server';
-import type { HTTPHeaders, TRPCClientErrorLike } from '@trpc/client';
-import { createTRPCOptionsProxy } from '@trpc/tanstack-react-query';
-import superjson from 'superjson';
+import { createTrpcClient } from "@repo/api/client";
+import { TRPCProvider } from "@repo/api/react";
+import type { AppRouter } from "@repo/api/server";
+import { QueryCache, QueryClient } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { createIsomorphicFn, createServerFn } from "@tanstack/react-start";
+import { getWebRequest } from "@tanstack/react-start/server";
+import type { HTTPHeaders, TRPCClientErrorLike } from "@trpc/client";
+import { createTRPCOptionsProxy } from "@trpc/tanstack-react-query";
+import superjson from "superjson";
 
 const QUERY_STALE_TIME_FIVE_MINUTES = 5 * 60 * 1000;
 
-const getRequestHeaders = createServerFn({ method: 'GET' }).handler(() => {
+const getRequestHeaders = createServerFn({ method: "GET" }).handler(() => {
   const request = getWebRequest();
   const headers = new Headers(request?.headers);
 
@@ -24,10 +24,10 @@ const headers = createIsomorphicFn()
 
 function getUrl() {
   const base = (() => {
-    if (typeof window !== 'undefined') {
-      return 'http://localhost:3035';
+    if (typeof window !== "undefined") {
+      return "http://localhost:3035";
     }
-    return 'http://localhost:3035';
+    return "http://localhost:3035";
   })();
   return `${base}/api/trpc`;
 }
@@ -49,9 +49,9 @@ export const createQueryClient = () => {
           const err = _err as unknown as TRPCClientErrorLike<AppRouter>;
           const code = err?.data?.code;
           if (
-            code === 'BAD_REQUEST' ||
-            code === 'FORBIDDEN' ||
-            code === 'UNAUTHORIZED'
+            code === "BAD_REQUEST" ||
+            code === "FORBIDDEN" ||
+            code === "UNAUTHORIZED"
           ) {
             // if input data is wrong or you're not authorized there's no point retrying a query
             return false;

@@ -1,20 +1,20 @@
-import { Button } from '@repo/ui/components/button';
+import Login from "@apps/store/components/auth/login";
+import Register from "@apps/store/components/auth/register";
+import { Button } from "@repo/ui/components/button";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-} from '@repo/ui/components/card';
+} from "@repo/ui/components/card";
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
-} from '@repo/ui/components/tabs';
-import { createFileRoute } from '@tanstack/react-router';
-import Login from '~/components/auth/login';
-import Register from '~/components/auth/register';
-export const Route = createFileRoute('/')({
+} from "@repo/ui/components/tabs";
+import { createFileRoute } from "@tanstack/react-router";
+export const Route = createFileRoute("/")({
   component: Home,
 });
 
@@ -60,7 +60,7 @@ function Home() {
 
       <div className="mt-8">
         <h3>Welcome Store!!!</h3>
-        <Button variant={'outline'}>Click me</Button>
+        <Button variant={"outline"}>Click me</Button>
       </div>
     </div>
   );

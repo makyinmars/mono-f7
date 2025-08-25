@@ -1,5 +1,5 @@
-import { createAuthClient } from '@repo/auth/client';
-import { env } from '~/env';
+import { env } from "@apps/admin/env";
+import { createAuthClient } from "@repo/auth/client";
 
 export const authClient: ReturnType<typeof createAuthClient> = createAuthClient(
   {
@@ -8,5 +8,5 @@ export const authClient: ReturnType<typeof createAuthClient> = createAuthClient(
 );
 
 export type AuthSession =
-  | ReturnType<typeof createAuthClient>['$Infer']['Session']
+  | ReturnType<typeof createAuthClient>["$Infer"]["Session"]
   | null;

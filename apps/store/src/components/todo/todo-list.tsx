@@ -1,9 +1,9 @@
-import { useTRPC } from '@repo/api/react';
-import { Card, CardContent } from '@repo/ui/components/card';
-import { Skeleton } from '@repo/ui/components/skeleton';
-import { useQuery } from '@tanstack/react-query';
-import { FileText } from 'lucide-react';
-import { TodoCard } from './todo-card';
+import { useTRPC } from "@repo/api/react";
+import { Card, CardContent } from "@repo/ui/components/card";
+import { Skeleton } from "@repo/ui/components/skeleton";
+import { useQuery } from "@tanstack/react-query";
+import { FileText } from "lucide-react";
+import { TodoCard } from "./todo-card";
 
 export function TodoList() {
   const trpc = useTRPC();
@@ -38,7 +38,7 @@ export function TodoList() {
           <div className="mb-2 text-destructive">Failed to load todos</div>
           <p className="text-muted-foreground text-sm">
             {todosQuery.error?.message ||
-              'An error occurred while fetching todos.'}
+              "An error occurred while fetching todos."}
           </p>
         </CardContent>
       </Card>

@@ -1,5 +1,5 @@
-import { createAuthClient } from '@repo/auth/client';
-import { env } from '~/env';
+import { env } from "@apps/store/env";
+import { createAuthClient } from "@repo/auth/client";
 
 export const authClient = createAuthClient({
   apiBaseUrl: env.PUBLIC_API_URL,
@@ -7,9 +7,9 @@ export const authClient = createAuthClient({
 
 export type AuthUser = ReturnType<
   typeof createAuthClient
->['$Infer']['Session']['user'];
+>["$Infer"]["Session"]["user"];
 export type AuthSession =
-  | ReturnType<typeof createAuthClient>['$Infer']['Session']['session']
+  | ReturnType<typeof createAuthClient>["$Infer"]["Session"]["session"]
   | null;
 
 export interface Auth {

@@ -4,12 +4,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a Turborepo monorepo with two applications and shared packages:
+This is a Turborepo monorepo with three applications and shared packages:
 
 ### Applications
 
 - **server** - Bun/Hono API server on port 3035
 - **store** - TanStack Start app with file-based routing for SSR/SSG capabilities
+- **admin** - TanStack Start admin dashboard on port 3001
 
 ### Packages
 
@@ -71,10 +72,12 @@ turbo run docker:build
 # Build individual Docker images
 bun run docker:build:server  # (when Dockerfile exists)
 bun run docker:build:store
+bun run docker:build:admin
 
 # Run Docker containers
 bun run docker:run:server    # (when Dockerfile exists)
 bun run docker:run:store     # http://localhost:3000
+bun run docker:run:admin     # http://localhost:3001
 ```
 
 ### Single App Development
@@ -83,10 +86,12 @@ bun run docker:run:store     # http://localhost:3000
 # Run specific app
 turbo dev --filter=server
 turbo dev --filter=store
+turbo dev --filter=admin
 
 # Build specific app
 turbo build --filter=server
 turbo build --filter=store
+turbo build --filter=admin
 ```
 
 ### Component Generation
@@ -136,6 +141,15 @@ turbo gen react-component
 - Shared configs in `packages/typescript-config/`
 - Base config uses strict mode with modern ES2022 target
 - NodeNext module resolution for better ESM compatibility
+- App-specific path mappings: `@apps/store/*` for store app, `@apps/admin/*` for admin app
+
+### Import Path Conventions
+
+- **@repo/*** - Shared packages (ui, auth, db, api, etc.)
+- **@apps/store/*** - Store app internal imports (components, utils, etc.)
+- **@apps/admin/*** - Admin app internal imports (components, utils, etc.)
+- Path resolution handled by vite-tsconfig-paths plugin in Vite configuration
+- TypeScript path mappings configured in each app's tsconfig.json
 
 ### Environment Variables Configuration
 

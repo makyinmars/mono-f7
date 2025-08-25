@@ -35,7 +35,8 @@
   },
   "javascript": {
     "formatter": {
-      "jsxQuoteStyle": "double"
+      "jsxQuoteStyle": "double",
+      "quoteStyle": "double"
     }
   },
   "extends": ["ultracite"]

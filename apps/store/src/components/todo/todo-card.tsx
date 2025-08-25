@@ -1,32 +1,32 @@
-import type { TodoAllProcedure } from '@repo/api/server';
-import { TodoStatus } from '@repo/db/schema';
-import { Badge } from '@repo/ui/components/badge';
+import type { TodoAllProcedure } from "@repo/api/server";
+import { TodoStatus } from "@repo/db/schema";
+import { Badge } from "@repo/ui/components/badge";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-} from '@repo/ui/components/card';
-import { Calendar, CheckCircle, Clock, Play } from 'lucide-react';
+} from "@repo/ui/components/card";
+import { Calendar, CheckCircle, Clock, Play } from "lucide-react";
 
 const statusConfig = {
   [TodoStatus.NOT_STARTED]: {
-    label: 'Not Started',
-    variant: 'outline' as const,
+    label: "Not Started",
+    variant: "outline" as const,
     icon: Clock,
-    className: 'text-gray-600 border-gray-300',
+    className: "text-gray-600 border-gray-300",
   },
   [TodoStatus.IN_PROGRESS]: {
-    label: 'In Progress',
-    variant: 'default' as const,
+    label: "In Progress",
+    variant: "default" as const,
     icon: Play,
-    className: 'text-blue-600 bg-blue-50 border-blue-200',
+    className: "text-blue-600 bg-blue-50 border-blue-200",
   },
   [TodoStatus.COMPLETED]: {
-    label: 'Completed',
-    variant: 'secondary' as const,
+    label: "Completed",
+    variant: "secondary" as const,
     icon: CheckCircle,
-    className: 'text-green-600 bg-green-50 border-green-200',
+    className: "text-green-600 bg-green-50 border-green-200",
   },
 };
 
@@ -35,12 +35,12 @@ export function TodoCard({ todo }: { todo: TodoAllProcedure[number] }) {
   const StatusIcon = statusInfo.icon;
 
   const formatDate = (date: Date) => {
-    return new Intl.DateTimeFormat('en-US', {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
+    return new Intl.DateTimeFormat("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
     }).format(date);
   };
 

@@ -1,11 +1,11 @@
-import { Separator } from '@repo/ui/components/separator';
-import { createFileRoute, Link } from '@tanstack/react-router';
-import { TodoList } from '~/components/todo/todo-list';
-import { UserMenu } from '~/components/user-menu';
-import { assertAuthenticated } from '~/fn/auth';
-import { Route as MainRoute } from '../routes/__root';
+import { TodoList } from "@apps/store/components/todo/todo-list";
+import { UserMenu } from "@apps/store/components/user-menu";
+import { assertAuthenticated } from "@apps/store/fn/auth";
+import { Separator } from "@repo/ui/components/separator";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Route as MainRoute } from "../routes/__root";
 
-export const Route = createFileRoute('/protected')({
+export const Route = createFileRoute("/protected")({
   beforeLoad: ({ context }) => {
     assertAuthenticated(context.auth);
   },

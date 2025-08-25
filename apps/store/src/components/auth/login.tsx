@@ -1,5 +1,6 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { Button } from '@repo/ui/components/button';
+import { authClient } from "@apps/store/clients/auth-client";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Button } from "@repo/ui/components/button";
 import {
   Form,
   FormControl,
@@ -7,18 +8,17 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@repo/ui/components/form';
-import { Input } from '@repo/ui/components/input';
-import { Eye, EyeOff, Loader2 } from 'lucide-react';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { toast } from 'sonner';
-import { z } from 'zod';
-import { authClient } from '~/clients/auth-client';
+} from "@repo/ui/components/form";
+import { Input } from "@repo/ui/components/input";
+import { Eye, EyeOff, Loader2 } from "lucide-react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { z } from "zod";
 
 const FormSchema = z.object({
-  email: z.email('Please enter a valid email address'),
-  password: z.string().min(8, 'Password must be at least 8 characters'),
+  email: z.email("Please enter a valid email address"),
+  password: z.string().min(8, "Password must be at least 8 characters"),
 });
 
 type FormData = z.infer<typeof FormSchema>;
@@ -29,8 +29,8 @@ const Login = () => {
   const form = useForm<FormData>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
     },
   });
 
@@ -42,7 +42,7 @@ const Login = () => {
       },
       {
         onSuccess: () => {
-          window.location.href = '/protected';
+          window.location.href = "/protected";
         },
       }
     );
@@ -81,7 +81,7 @@ const Login = () => {
                 <div className="relative flex w-full items-center justify-end">
                   <Input
                     className="mt-1"
-                    type={isPasswordVisible ? 'text' : 'password'}
+                    type={isPasswordVisible ? "text" : "password"}
                     {...field}
                   />
                   <Button
@@ -115,7 +115,7 @@ const Login = () => {
               Logging in...
             </>
           ) : (
-            'Login'
+            "Login"
           )}
         </Button>
 

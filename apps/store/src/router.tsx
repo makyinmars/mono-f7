@@ -1,12 +1,12 @@
 import {
   createRouter as createTanstackRouter,
   ErrorComponent,
-} from '@tanstack/react-router';
-import { routerWithQueryClient } from '@tanstack/react-router-with-query';
-import DefaultLoading from './components/default-loading';
-import NotFound from './components/not-found';
-import { routeTree } from './routeTree.gen';
-import * as TanstackQuery from './trpc/root-provider';
+} from "@tanstack/react-router";
+import { routerWithQueryClient } from "@tanstack/react-router-with-query";
+import DefaultLoading from "./components/default-loading";
+import NotFound from "./components/not-found";
+import { routeTree } from "./routeTree.gen";
+import * as TanstackQuery from "./trpc/root-provider";
 
 export function createRouter() {
   const queryClient = TanstackQuery.createQueryClient();
@@ -24,7 +24,7 @@ export function createRouter() {
       scrollRestoration: true,
       defaultPreloadStaleTime: 0,
       defaultStaleTime: 0,
-      defaultPreload: 'intent',
+      defaultPreload: "intent",
       defaultViewTransition: true,
       defaultPendingComponent: DefaultLoading,
       defaultNotFoundComponent: NotFound,
@@ -43,7 +43,7 @@ export function createRouter() {
   return router;
 }
 
-declare module '@tanstack/react-router' {
+declare module "@tanstack/react-router" {
   interface Register {
     router: ReturnType<typeof createRouter>;
   }
