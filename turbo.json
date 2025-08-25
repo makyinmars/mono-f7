@@ -16,7 +16,7 @@
     },
     "server#build": {
       "outputs": [],
-      "env": ["DATABASE_URL", "SERVER_*", "PUBLIC_WEB_URL"]
+      "env": ["DATABASE_URL", "SERVER_*", "PUBLIC_URL_STORE", "PUBLIC_URL_ADMIN", "AUTH_COOKIE_DOMAIN"]
     },
     "lint": {
       "dependsOn": ["^lint"]
@@ -37,7 +37,7 @@
     "server#dev": {
       "cache": false,
       "persistent": true,
-      "env": ["DATABASE_URL", "SERVER_*", "PUBLIC_WEB_URL"]
+      "env": ["DATABASE_URL", "SERVER_*", "PUBLIC_URL_STORE", "PUBLIC_URL_ADMIN", "AUTH_COOKIE_DOMAIN"]
     },
     "store#dev": {
       "cache": false,
