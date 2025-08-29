@@ -1,6 +1,6 @@
 # mono-f7
 
-A modern full-stack monorepo built with cutting-edge technologies for scalable web applications. This repository demonstrates the power of combining TanStack Start, tRPC, Drizzle ORM, and Better Auth in a Turborepo structure with Bun as the runtime.
+A modern full-stack monorepo built with cutting-edge technologies for scalable web applications. This repository demonstrates the power of combining TanStack Start, tRPC, Drizzle ORM, and Better Auth in a Turborepo structure with Node.js as the runtime.
 
 ## 🚀 Vision
 
@@ -17,7 +17,7 @@ This project aims to be a comprehensive example of modern web development practi
 
 ### Applications
 
-- **`server`** - Hono API server with Bun runtime on port 3035
+- **`server`** - Hono API server with Node.js runtime on port 3035
 - **`store`** - TanStack Start application with file-based routing for SSR/SSG capabilities
 
 ### Packages
@@ -35,23 +35,23 @@ This project aims to be a comprehensive example of modern web development practi
 
 ### Tech Stack
 
-- **Runtime**: [Bun](https://bun.sh/) for server apps, Node.js for TanStack Start
+- **Runtime**: [Node.js](https://nodejs.org/) for all applications
 - **Framework**: TanStack Start, Hono
 - **Database**: PostgreSQL with [Drizzle ORM](https://orm.drizzle.team/)
 - **Authentication**: [Better Auth](https://www.better-auth.com/) with OAuth support
 - **API**: [tRPC](https://trpc.io/) for end-to-end type safety
 - **UI**: [Tailwind CSS v4](https://tailwindcss.com/) with [shadcn/ui](https://ui.shadcn.com/)
-- **Package Manager**: Bun workspaces with catalog feature
+- **Package Manager**: pnpm workspaces with catalog feature
 - **Build Tool**: [Turborepo](https://turbo.build/repo) for monorepo orchestration
 - **Code Quality**: [Ultracite](https://github.com/bombshell-dev/ultracite) for linting and formatting
-- **Containerization**: Docker with Bun-optimized images
+- **Containerization**: Docker with Node.js-optimized images
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
-- **Bun** v1.2.19+ (recommended package manager and runtime)
-- **Node.js** v22+ (for Next.js apps)
+- **pnpm** v10.15.0+ (package manager)
+- **Node.js** v22+ (runtime for all applications)
 - **PostgreSQL** (for database, can be run via Docker)
 
 ### Installation
@@ -61,7 +61,7 @@ Clone the repository and install dependencies:
 ```bash
 git clone <repository-url>
 cd mono-f7
-bun install
+pnpm install
 ```
 
 ### Environment Variables
@@ -97,7 +97,7 @@ Start all applications in development mode:
 
 ```bash
 # Start all apps simultaneously
-bun run dev
+pnpm run dev
 
 # Or with Turbo directly
 turbo dev
@@ -119,7 +119,7 @@ Build all applications and packages:
 
 ```bash
 # Build everything
-bun run build
+pnpm run build
 
 # Build specific app
 turbo build --filter=server
@@ -132,13 +132,13 @@ The project uses Ultracite for linting and formatting:
 
 ```bash
 # Lint all code
-bun run lint
+pnpm run lint
 
 # Format all code
-bun run format
+pnpm run format
 
 # Type check all packages
-bun run check-types
+pnpm run check-types
 ```
 
 ### Docker Development
@@ -147,13 +147,13 @@ The project includes Docker support for containerized development and deployment
 
 ```bash
 # Build all Docker images
-bun run docker:build
+pnpm run docker:build
 
 # Build individual images
-bun run docker:build:store
+pnpm run docker:build:store
 
 # Run containers
-bun run docker:run:store   # http://localhost:3000
+pnpm run docker:run:store   # http://localhost:3000
 ```
 
 ## 🗺️ Roadmap
@@ -163,7 +163,7 @@ This project follows a structured development approach with clear priorities. Se
 ### Current Status
 
 - ✅ Turborepo monorepo structure
-- ✅ Hono API server with Bun
+- ✅ Hono API server with Node.js
 - ✅ TanStack Start application with file-based routing
 - ✅ shadcn/ui component library
 - ✅ Ultracite linting and formatting with Biome configuration
@@ -182,7 +182,7 @@ This project follows a structured development approach with clear priorities. Se
 ```
 mono-f7/
 ├── apps/
-│   ├── server/       # Hono API server (Bun)
+│   ├── server/       # Hono API server (Node.js)
 │   └── store/        # TanStack Start application
 ├── packages/
 │   ├── ui/           # Shared React components
@@ -213,19 +213,19 @@ This project serves as a reference implementation for modern full-stack developm
 
 ### Development Workflow
 
-1. Install dependencies: `bun install`
-2. Start development servers: `bun run dev`
+1. Install dependencies: `pnpm install`
+2. Start development servers: `pnpm run dev`
 3. Make changes following existing patterns
-4. Run quality checks: `bun run lint && bun run check-types`
+4. Run quality checks: `pnpm run lint && pnpm run check-types`
 5. Test your changes across all affected applications
-6. Build Docker images for deployment: `bun run docker:build`
+6. Build Docker images for deployment: `pnpm run docker:build`
 
 ## 📚 Resources
 
 ### Core Technologies
 
 - [Turborepo Documentation](https://turbo.build/repo/docs)
-- [Bun Runtime](https://bun.sh/docs)
+- [Node.js Runtime](https://nodejs.org/docs/latest/)
 - [TanStack Start](https://tanstack.com/start/latest)
 - [tRPC](https://trpc.io/)
 - [Drizzle ORM](https://orm.drizzle.team/)

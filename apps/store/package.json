@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite dev",
     "build": "vite build && tsc --noEmit",
-    "start": "bun .output/server/index.mjs",
+    "start": "node .output/server/index.mjs",
     "lint": "ultracite lint",
     "format": "ultracite format",
     "format:unsafe": "ultracite format --unsafe",
@@ -14,9 +14,9 @@
     "clean": "rm -rf .output node_modules dist .turbo .tanstack"
   },
   "dependencies": {
-    "@repo/ui": "*",
-    "@repo/auth": "*",
-    "@repo/api": "*",
+    "@repo/ui": "workspace:*",
+    "@repo/auth": "workspace:*",
+    "@repo/api": "workspace:*",
     "@tanstack/react-router": "catalog:",
     "@tanstack/react-router-devtools": "catalog:",
     "@tanstack/react-start": "catalog:",
@@ -35,7 +35,7 @@
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@repo/typescript-config": "*",
+    "@repo/typescript-config": "workspace:*",
     "@types/node": "^22.15.3",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",

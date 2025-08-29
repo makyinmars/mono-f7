@@ -1,8 +1,8 @@
-import type { AuthInstance } from '@repo/auth/server';
-import type { DatabaseInstance } from '@repo/db/client';
-import { initTRPC, TRPCError } from '@trpc/server';
-import SuperJSON from 'superjson';
-import { ZodError } from 'zod';
+import type { AuthInstance } from "@repo/auth/server";
+import type { DatabaseInstance } from "@repo/db/client";
+import { initTRPC, TRPCError } from "@trpc/server";
+import SuperJSON from "superjson";
+import { ZodError } from "zod";
 
 export const createTRPCContext = async ({
   auth,
@@ -14,7 +14,7 @@ export const createTRPCContext = async ({
   headers: Headers;
 }): Promise<{
   db: DatabaseInstance;
-  session: AuthInstance['$Infer']['Session'] | null;
+  session: AuthInstance["$Infer"]["Session"] | null;
 }> => {
   const session = await auth.api.getSession({
     headers,
@@ -46,7 +46,7 @@ export const publicProcedure = t.procedure;
 
 export const protectedProcedure = publicProcedure.use(({ ctx, next }) => {
   if (!ctx.session?.user) {
-    throw new TRPCError({ code: 'FORBIDDEN' });
+    throw new TRPCError({ code: "FORBIDDEN" });
   }
   return next({
     ctx: {

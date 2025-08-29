@@ -14,12 +14,12 @@
     "auth:schema:generate": "bunx @better-auth/cli generate --config ./src/cli-config.ts --output ../db/src/schema/auth.ts"
   },
   "dependencies": {
-    "@repo/db": "*",
+    "@repo/db": "workspace:*",
     "better-auth": "catalog:",
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@repo/typescript-config": "*",
+    "@repo/typescript-config": "workspace:*",
     "@types/node": "^22.15.3",
     "@better-auth/cli": "catalog:",
     "typescript": "catalog:"

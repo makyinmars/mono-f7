@@ -1,6 +1,6 @@
-import type { DatabaseInstance } from '@repo/db/client';
-import { type BetterAuthOptions, betterAuth } from 'better-auth';
-import { drizzleAdapter } from 'better-auth/adapters/drizzle';
+import type { DatabaseInstance } from "@repo/db/client";
+import { type BetterAuthOptions, betterAuth } from "better-auth";
+import { drizzleAdapter } from "better-auth/adapters/drizzle";
 
 export interface AuthOptions {
   storeUrl: string;
@@ -18,7 +18,7 @@ export type AuthInstance = ReturnType<typeof createAuth>;
 export const getBaseOptions = (db: DatabaseInstance) =>
   ({
     database: drizzleAdapter(db, {
-      provider: 'pg',
+      provider: "pg",
     }),
 
     /**
@@ -35,9 +35,9 @@ export const createAuth = ({
   authSecret,
   cookieDomain,
 }: AuthOptions) => {
-  console.log('store url', storeUrl);
-  console.log('admin url', adminUrl);
-  console.log('cookie domain', cookieDomain);
+  console.log("store url", storeUrl);
+  console.log("admin url", adminUrl);
+  console.log("cookie domain", cookieDomain);
 
   // Build trusted origins array
   const trustedOrigins = [new URL(storeUrl).origin, new URL(adminUrl).origin];

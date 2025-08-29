@@ -11,10 +11,6 @@
     "./server": {
       "types": "./src/server/index.ts",
       "default": "./src/server/index.ts"
-    },
-    "./react": {
-      "types": "./src/client/react.tsx",
-      "default": "./src/client/react.tsx"
     }
   },
   "scripts": {

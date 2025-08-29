@@ -5,10 +5,10 @@ import {
   isNonJsonSerializable,
   loggerLink,
   splitLink,
-} from '@trpc/client';
-import type { TRPCCombinedDataTransformer } from '@trpc/server';
-import SuperJSON from 'superjson';
-import type { AppRouter } from '../server';
+} from "@trpc/client";
+import type { TRPCCombinedDataTransformer } from "@trpc/server";
+import SuperJSON from "superjson";
+import type { AppRouter } from "../server";
 
 export const transformer: TRPCCombinedDataTransformer = {
   input: {
@@ -38,8 +38,8 @@ export const createTrpcClient = ({ serverUrl, headers }: APIClientOptions) => {
     links: [
       loggerLink({
         enabled: (op) =>
-          process.env.NODE_ENV === 'development' ||
-          (op.direction === 'down' && op.result instanceof Error),
+          process.env.NODE_ENV === "development" ||
+          (op.direction === "down" && op.result instanceof Error),
       }),
       splitLink({
         condition: (op) => isNonJsonSerializable(op.input),
@@ -55,7 +55,7 @@ export const createTrpcClient = ({ serverUrl, headers }: APIClientOptions) => {
                * This is required if you are deploying your frontend (web)
                * and backend (server) on two different domains.
                */
-              credentials: 'include',
+              credentials: "include",
             });
           },
           headers,
@@ -72,7 +72,7 @@ export const createTrpcClient = ({ serverUrl, headers }: APIClientOptions) => {
                * This is required if you are deploying your frontend (web)
                * and backend (server) on two different domains.
                */
-              credentials: 'include',
+              credentials: "include",
             });
           },
           headers,
