@@ -17,6 +17,10 @@ RUN corepack enable && corepack prepare pnpm@10.15.0 --activate
 
 FROM base AS builder
 
+# Set up pnpm global directory
+ENV PNPM_HOME="/root/.local/share/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+
 # Install Turbo globally
 RUN pnpm add --global turbo
 
