@@ -1,4 +1,4 @@
-import { useTRPC } from "@repo/api/react";
+import { useTRPC } from "@apps/store/trpc/react";
 import { Card, CardContent } from "@repo/ui/components/card";
 import { Skeleton } from "@repo/ui/components/skeleton";
 import { useQuery } from "@tanstack/react-query";

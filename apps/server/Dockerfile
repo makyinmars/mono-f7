@@ -1,4 +1,4 @@
-FROM oven/bun:alpine AS base
+FROM node:22-alpine AS base
 
 WORKDIR /app
 
@@ -7,15 +7,22 @@ ENV TURBO_TELEMETRY_DISABLED=1
 ENV CI=1
 ENV PORT=3035
 
-# Install system dependencies for Alpine + Bun
+# Install system dependencies for Alpine + Node.js
 RUN apk update && apk add --no-cache libc6-compat
+
+# Install pnpm globally
+RUN corepack enable && corepack prepare pnpm@10.15.0 --activate
 
 # =========================================================================== #
 
 FROM base AS builder
 
+# Set up pnpm global directory
+ENV PNPM_HOME="/root/.local/share/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+
 # Install Turbo globally
-RUN bun add --global turbo
+RUN pnpm add --global turbo
 
 # Copy entire monorepo
 COPY . .
@@ -50,21 +57,17 @@ ENV AUTH_COOKIE_DOMAIN=${AUTH_COOKIE_DOMAIN}
 COPY --from=builder /app/out/json/ .
 
 # Copy original root lockfile for reference
-COPY --from=builder /app/bun.lock ./bun.lock
+COPY --from=builder /app/pnpm-lock.yaml ./pnpm-lock.yaml
 
-# Install dependencies using simple bun install
-# Note: Avoiding --frozen-lockfile and --production due to known Bun v1.2.19 issues:
-# - Lockfile parsing errors in Docker containers and monorepos
-# - Version mismatch issues between lockfile creation and install
-# - Production mode parsing failures with dev dependencies
-# Ref: https://github.com/oven-sh/bun/issues (known Docker + frozen-lockfile issues)
-RUN bun install
+# Install dependencies using pnpm
+RUN pnpm install --frozen-lockfile
 
 # Copy pruned workspace source files
 COPY --from=builder /app/out/full/ .
 
-# Run type checking for the server application
-RUN bun turbo build
+# Build and type check the server application
+RUN pnpm turbo build
+RUN cd apps/server && pnpm tsc
 
 # =========================================================================== #
 
@@ -86,7 +89,7 @@ EXPOSE 3035
 
 # Health check for production readiness
 HEALTHCHECK --interval=30s --timeout=10s --retries=3 \
-  CMD bun --version || exit 1
+  CMD node --version || exit 1
 
-# Start the Hono server with Bun
-CMD ["bun", "src/index.ts"]
+# Start the Hono server with Node.js
+CMD ["node", "dist/index.js"]

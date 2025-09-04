@@ -12,7 +12,7 @@ export default defineConfig({
       projects: ["./tsconfig.json"],
     }),
     tanstackStart({
-      target: "bun",
+      target: "node",
       customViteReactPlugin: true,
     }),
     viteReact(),

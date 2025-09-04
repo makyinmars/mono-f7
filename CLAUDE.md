@@ -8,7 +8,7 @@ This is a Turborepo monorepo with three applications and shared packages:
 
 ### Applications
 
-- **server** - Bun/Hono API server on port 3035
+- **server** - Node.js/Hono API server on port 3035
 - **store** - TanStack Start store on port 3000
 - **admin** - TanStack Start admin dashboard on port 3001
 
@@ -22,9 +22,9 @@ This is a Turborepo monorepo with three applications and shared packages:
 
 ## Package Manager & Runtime
 
-- **Package Manager**: Bun (v1.2.20+)
+- **Package Manager**: pnpm (v10.15.0+)
 - **Node Version**: >=22
-- **Runtime**: Uses Bun for the server app and for both apps: admin and store
+- **Runtime**: Uses Node.js for the server app and for both apps: admin and store
 
 ## Common Development Commands
 
@@ -32,52 +32,52 @@ This is a Turborepo monorepo with three applications and shared packages:
 
 ```bash
 # Install dependencies
-bun install
+pnpm install
 
 # Start all apps in development mode
-bun run dev
+pnpm run dev
 # or
 turbo dev
 
 # Build all apps and packages
-bun run build
+pnpm run build
 # or
 turbo build
 
 # Lint all code using Ultracite
-bun run lint
+pnpm run lint
 # or
 turbo lint
 
 # Format all code using Ultracite
-bun run format
+pnpm run format
 # or
 turbo format
 
 # Type check all packages
-bun run check-types
+pnpm run check-types
 # or
 turbo check-types
 
 # Clean all build artifacts
-bun run clean
+pnpm run clean
 # or
 turbo clean
 
 # Build all Docker images
-bun run docker:build
+pnpm run docker:build
 # or
 turbo run docker:build
 
 # Build individual Docker images
-bun run docker:build:server  # (when Dockerfile exists)
-bun run docker:build:store
-bun run docker:build:admin
+pnpm run docker:build:server  # (when Dockerfile exists)
+pnpm run docker:build:store
+pnpm run docker:build:admin
 
 # Run Docker containers
-bun run docker:run:server    # (when Dockerfile exists)
-bun run docker:run:store     # http://localhost:3000
-bun run docker:run:admin     # http://localhost:3001
+pnpm run docker:run:server    # (when Dockerfile exists)
+pnpm run docker:run:store     # http://localhost:3000
+pnpm run docker:run:admin     # http://localhost:3001
 ```
 
 ### Single App Development
@@ -113,14 +113,15 @@ turbo gen react-component
 
 ### Dependencies Management
 
-- Uses Bun workspaces catalog feature for centralized dependency versions
-- React dependencies (react, react-dom, @types/react, @types/react-dom) are managed via the root catalog
+- Uses pnpm workspaces with catalog feature for centralized dependency versions
+- Catalog configuration is in pnpm-workspace.yaml for better organization
+- React dependencies (react, react-dom, @types/react, @types/react-dom) are managed via the catalog
 - TypeScript version is centrally managed via catalog
 
 ### Build Configuration
 
-- TanStack Start app uses Vite for development with Bun target
-- Server app uses Bun's hot reload (`bun run --hot`)
+- TanStack Start app uses Vite for development with Node.js target
+- Server app uses tsx for development with hot reload (`tsx watch`)
 - Turbo handles task orchestration and caching
 - Docker builds use multi-stage builds for production optimization
 
@@ -131,8 +132,8 @@ turbo gen react-component
 
 ### Docker Configuration
 
-- Store app has Bun-optimized Dockerfile with multi-stage build
-- Uses `oven/bun:alpine` base image for minimal footprint
+- Store app has Node.js-optimized Dockerfile with multi-stage build
+- Uses `node:22-alpine` base image for minimal footprint
 - Docker commands integrated with Turbo for orchestrated builds
 - Production containers run with non-root user for security
 

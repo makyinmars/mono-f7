@@ -10,7 +10,7 @@
     "clean": "rm -rf node_modules dist .turbo"
   },
   "devDependencies": {
-    "@repo/typescript-config": "*",
+    "@repo/typescript-config": "workspace:*",
     "@tailwindcss/postcss": "^4.1.11",
     "@types/node": "^22.15.3",
     "@types/react": "catalog:",

@@ -2,8 +2,9 @@
   "name": "server",
   "type": "module",
   "scripts": {
-    "dev": "bun run --hot src/index.ts",
-    "build": "tsc --noEmit",
+    "dev": "bun src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
     "lint": "ultracite lint",
     "format": "ultracite format",
     "format:unsafe": "ultracite format --unsafe",
@@ -15,12 +16,14 @@
     "@repo/auth": "workspace:*",
     "@repo/db": "workspace:*",
     "hono": "^4.9.0",
+    "@hono/node-server": "^1.19.0",
     "@hono/trpc-server": "^0.4.0",
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@repo/typescript-config": "*",
-    "@types/bun": "catalog:",
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "catalog:",
+    "tsx": "catalog:",
     "typescript": "catalog:"
   }
 }
