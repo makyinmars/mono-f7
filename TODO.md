@@ -190,7 +190,7 @@
 ### Repository Structure
 
 ```
-mono-f7/
+stylo/
 ├── apps/
 │   ├── server/    # API server (Bun + Hono)
 │   └── store/     # TanStack Start app ✅ (+ Dockerfile 🐳)
@@ -241,4 +241,3 @@ bun run docker:run:store     # http://localhost:3000
 *Auth package completed - Better Auth with Drizzle adapter and consistent TypeScript config*
 *Docker Compose setup for local PostgreSQL development*
 *Environment variables completed - Package-specific .env files with Turborepo best practices and Zod validation*
-

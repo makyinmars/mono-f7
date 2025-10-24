@@ -8,6 +8,13 @@
       "when": 1754808607800,
       "tag": "0000_chilly_captain_cross",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1761319536911,
+      "tag": "0001_dry_firelord",
+      "breakpoints": true
     }
   ]
 }

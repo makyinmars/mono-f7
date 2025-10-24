@@ -1,17 +1,17 @@
-import { desc, eq } from '@repo/db';
+import { desc, eq } from "@repo/db";
 import {
   apiTodoCreate,
   apiTodoId,
   apiTodoUpdate,
   todos,
   user,
-} from '@repo/db/schema';
+} from "@repo/db/schema";
 
-import { TRPCError, type TRPCRouterRecord } from '@trpc/server';
-import { protectedProcedure, publicProcedure } from '../trpc';
-import type { RouterOutput } from '../utils';
+import { TRPCError, type TRPCRouterRecord } from "@trpc/server";
+import { protectedProcedure, publicProcedure } from "../trpc";
+import type { RouterOutput } from "../utils";
 
-export type TodoAllProcedure = RouterOutput['todos']['all'];
+export type TodoAllProcedure = RouterOutput["todos"]["all"];
 
 const todoRouter = {
   all: protectedProcedure.query(({ ctx }) => {
@@ -34,15 +34,15 @@ const todoRouter = {
 
     if (!parsed.success) {
       throw new TRPCError({
-        code: 'BAD_REQUEST',
-        message: parsed.error.issues.map((i) => i.message).join(', '),
+        code: "BAD_REQUEST",
+        message: parsed.error.issues.map((i) => i.message).join(", "),
       });
     }
 
     if (!parsed.data.id) {
       throw new TRPCError({
-        code: 'BAD_REQUEST',
-        message: 'No id provided',
+        code: "BAD_REQUEST",
+        message: "No id provided",
       });
     }
 
@@ -66,7 +66,7 @@ const todoRouter = {
 
     if (!dbTodo) {
       throw new TRPCError({
-        code: 'BAD_REQUEST',
+        code: "BAD_REQUEST",
         message: `No such todo with ID ${input.id}`,
       });
     }
@@ -80,8 +80,8 @@ const todoRouter = {
 
       if (!parsed.success) {
         throw new TRPCError({
-          code: 'BAD_REQUEST',
-          message: parsed.error.issues.map((i) => i.message).join(', '),
+          code: "BAD_REQUEST",
+          message: parsed.error.issues.map((i) => i.message).join(", "),
         });
       }
 
@@ -103,8 +103,8 @@ const todoRouter = {
 
       if (!parsed.success) {
         throw new TRPCError({
-          code: 'BAD_REQUEST',
-          message: parsed.error.issues.map((i) => i.message).join(', '),
+          code: "BAD_REQUEST",
+          message: parsed.error.issues.map((i) => i.message).join(", "),
         });
       }
       const [updated] = await ctx.db
@@ -125,15 +125,15 @@ const todoRouter = {
 
       if (!parsed.success) {
         throw new TRPCError({
-          code: 'BAD_REQUEST',
-          message: parsed.error.issues.map((i) => i.message).join(', '),
+          code: "BAD_REQUEST",
+          message: parsed.error.issues.map((i) => i.message).join(", "),
         });
       }
 
       if (!parsed.data.id) {
         throw new TRPCError({
-          code: 'BAD_REQUEST',
-          message: 'No id provided',
+          code: "BAD_REQUEST",
+          message: "No id provided",
         });
       }
 

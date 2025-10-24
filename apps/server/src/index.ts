@@ -1,11 +1,11 @@
-import { trpcServer } from '@hono/trpc-server';
-import { createApi } from '@repo/api/server';
-import { createAuth } from '@repo/auth/server';
-import { createDb } from '@repo/db/client';
-import { Hono } from 'hono';
-import { cors } from 'hono/cors';
-import { logger } from 'hono/logger';
-import { env } from './env';
+import { trpcServer } from "@hono/trpc-server";
+import { createApi } from "@repo/api/server";
+import { createAuth } from "@repo/auth/server";
+import { createDb } from "@repo/db/client";
+import { Hono } from "hono";
+import { cors } from "hono/cors";
+import { logger } from "hono/logger";
+import { env } from "./env";
 
 // Build trusted origins from both app URLs
 const trustedOrigins = [
@@ -14,9 +14,9 @@ const trustedOrigins = [
 ];
 
 const wildcardPath = {
-  ALL: '*',
-  BETTER_AUTH: '/api/auth/*',
-  TRPC: '/api/trpc/*',
+  ALL: "*",
+  BETTER_AUTH: "/api/auth/*",
+  TRPC: "/api/trpc/*",
 } as const;
 
 const db = createDb({ databaseUrl: env.DATABASE_URL });
@@ -36,8 +36,8 @@ const app = new Hono<{
   };
 }>();
 
-app.get('/healthcheck', (c) => {
-  return c.text('OK');
+app.get("/healthcheck", (c) => {
+  return c.text("OK");
 });
 
 app.use(logger());
@@ -47,9 +47,9 @@ app.use(
   cors({
     origin: trustedOrigins,
     credentials: true,
-    allowHeaders: ['Content-Type', 'Authorization'],
-    allowMethods: ['POST', 'GET', 'OPTIONS'],
-    exposeHeaders: ['Content-Length'],
+    allowHeaders: ["Content-Type", "Authorization"],
+    allowMethods: ["POST", "GET", "OPTIONS"],
+    exposeHeaders: ["Content-Length"],
     maxAge: 600,
   })
 );
@@ -62,21 +62,21 @@ app.use(
   })
 );
 
-app.on(['POST', 'GET'], wildcardPath.BETTER_AUTH, (c) =>
+app.on(["POST", "GET"], wildcardPath.BETTER_AUTH, (c) =>
   auth.handler(c.req.raw)
 );
 
 app.use(
   wildcardPath.TRPC,
   trpcServer({
-    endpoint: '/api/trpc',
+    endpoint: "/api/trpc",
     router: api.trpcRouter,
     createContext: (c) => api.createTRPCContext({ headers: c.req.headers }),
   })
 );
 
-app.get('/', (c) => {
-  return c.text('Hello Hono!');
+app.get("/", (c) => {
+  return c.text("Hello Hono!");
 });
 
 export default {

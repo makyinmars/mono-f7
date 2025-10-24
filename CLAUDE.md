@@ -160,6 +160,7 @@ This project follows Turborepo best practices for environment variable managemen
 - **Turborepo configuration** - Environment variables are specified per task in `turbo.json`
 
 #### File Structure
+
 ```
 apps/server/.env          # Server-specific variables (DATABASE_URL, SERVER_*, PUBLIC_WEB_URL)
 apps/store/.env           # Frontend-specific variables (PUBLIC_*, VITE_*)
@@ -167,12 +168,15 @@ packages/db/.env          # Database package variables (DATABASE_URL for migrati
 ```
 
 #### Environment Files
+
 - `apps/server/src/env.ts` - Zod schema for server environment validation
 - `apps/store/src/env.ts` - Zod schema for store environment validation
 - `packages/db/src/env.ts` - Zod schema for database environment validation
 
 #### Turborepo Configuration
+
 Each task in `turbo.json` specifies required environment variables:
+
 - Server tasks: `["DATABASE_URL", "SERVER_*", "PUBLIC_WEB_URL"]`
 - Store tasks: `["PUBLIC_*", "VITE_*"]`
 - Database tasks: `["DATABASE_URL"]`

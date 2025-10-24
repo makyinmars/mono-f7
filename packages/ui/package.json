@@ -18,6 +18,9 @@
     "typescript": "catalog:",
     "tailwindcss": "catalog:"
   },
+  "peerDependencies": {
+    "@tailwindcss/postcss": "^4.1.11"
+  },
   "dependencies": {
     "@hookform/resolvers": "catalog:",
     "@radix-ui/react-avatar": "^1.1.10",

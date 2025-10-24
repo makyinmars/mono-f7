@@ -1,5 +1,5 @@
 {
-  "name": "mono-f7",
+  "name": "stylo",
   "private": true,
   "type": "module",
   "scripts": {
@@ -15,12 +15,12 @@
     "db:generate": "turbo run db:generate",
     "db:studio": "turbo run db:studio",
     "docker:build": "turbo run docker:build",
-    "docker:build:server": "docker build -t mono-f7-server -f apps/server/Dockerfile .",
-    "docker:build:store": "docker build -t mono-f7-store -f apps/store/Dockerfile .",
-    "docker:build:admin": "docker build -t mono-f7-admin -f apps/admin/Dockerfile .",
-    "docker:run:server": "docker run -p 3005:3005 mono-f7-server",
-    "docker:run:store": "docker run -p 3000:3000 mono-f7-store",
-    "docker:run:admin": "docker run -p 3001:3001 mono-f7-admin"
+    "docker:build:server": "docker build -t stylo-server -f apps/server/Dockerfile .",
+    "docker:build:store": "docker build -t stylo-store -f apps/store/Dockerfile .",
+    "docker:build:admin": "docker build -t stylo-admin -f apps/admin/Dockerfile .",
+    "docker:run:server": "docker run -p 3005:3005 stylo-server",
+    "docker:run:store": "docker run -p 3000:3000 stylo-store",
+    "docker:run:admin": "docker run -p 3001:3001 stylo-admin"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.0",
@@ -76,7 +76,7 @@
       "sonner": "^2.0.7"
     }
   },
-  "packageManager": "bun@1.2.20",
+  "packageManager": "bun@1.3.0",
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json,jsonc,css,scss,md,mdx}": [
       "bunx ultracite format"
