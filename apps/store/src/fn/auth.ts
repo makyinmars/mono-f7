@@ -2,12 +2,12 @@ import { type Auth, authClient } from "@apps/store/clients/auth-client";
 import { queryOptions } from "@tanstack/react-query";
 import { redirect } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
-import { getHeaders } from "@tanstack/react-start/server";
+import { getRequestHeaders } from "@tanstack/react-start/server";
 
 export const getCurrentUserFn = createServerFn({
   method: "GET",
 }).handler(async () => {
-  const headers = getHeaders();
+  const headers = getRequestHeaders();
 
   try {
     // Convert headers to a format that fetch can understand

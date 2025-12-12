@@ -3,7 +3,7 @@ import type { AppRouter } from "@repo/api/server";
 import { QueryCache, QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { createIsomorphicFn, createServerFn } from "@tanstack/react-start";
-import { getWebRequest } from "@tanstack/react-start/server";
+import { getRequest } from "@tanstack/react-start/server";
 import type { HTTPHeaders, TRPCClientErrorLike } from "@trpc/client";
 import { createTRPCOptionsProxy } from "@trpc/tanstack-react-query";
 import superjson from "superjson";
@@ -12,7 +12,7 @@ import { TRPCProvider } from "./react";
 const QUERY_STALE_TIME_FIVE_MINUTES = 5 * 60 * 1000;
 
 const getRequestHeaders = createServerFn({ method: "GET" }).handler(() => {
-  const request = getWebRequest();
+  const request = getRequest();
   const headers = new Headers(request?.headers);
 
   return Object.fromEntries(headers);

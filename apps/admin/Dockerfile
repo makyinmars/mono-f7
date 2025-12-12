@@ -62,7 +62,7 @@ WORKDIR /app
 
 # Create non-root user for security
 RUN addgroup --system --gid 1001 appgroup && \
-    adduser --system --uid 1001 appuser
+  adduser --system --uid 1001 appuser
 
 USER appuser
 

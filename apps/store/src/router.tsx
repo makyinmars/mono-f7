@@ -8,7 +8,7 @@ import NotFound from "./components/not-found";
 import { routeTree } from "./routeTree.gen";
 import * as TanstackQuery from "./trpc/root-provider";
 
-export function createRouter() {
+export function getRouter() {
   const queryClient = TanstackQuery.createQueryClient();
   const serverHelpers = TanstackQuery.createServerHelpers({
     queryClient,
@@ -45,6 +45,6 @@ export function createRouter() {
 
 declare module "@tanstack/react-router" {
   interface Register {
-    router: ReturnType<typeof createRouter>;
+    router: ReturnType<typeof getRouter>;
   }
 }
