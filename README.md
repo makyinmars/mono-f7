@@ -52,7 +52,7 @@ This project aims to be a comprehensive example of modern web development practi
 
 - **Bun** v1.2.19+ (recommended package manager and runtime)
 - **Node.js** v22+ (for Next.js apps)
-- **PostgreSQL** (for database, can be run via Docker)
+- **Docker** (for PostgreSQL database via `bun run db:up`)
 
 ### Installation
 
@@ -139,6 +139,18 @@ bun run format
 
 # Type check all packages
 bun run check-types
+```
+
+### Database
+
+Start the PostgreSQL database using Docker:
+
+```bash
+# Start PostgreSQL container (runs on port 5432)
+bun run db:up
+
+# Stop PostgreSQL container
+bun run db:down
 ```
 
 ### Docker Development

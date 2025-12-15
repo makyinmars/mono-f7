@@ -49,7 +49,7 @@ export const apiTodoUpdate = todoUpdate.omit({
   updatedAt: true,
 });
 
-export const apiTodoCreateAndUpdate = apiTodoCreate.extend({
+export const apiTodoUpsert = apiTodoCreate.extend({
   id: z.uuid().optional(),
   text: z.string().min(3).max(250),
   description: z.string().optional(),
@@ -57,12 +57,12 @@ export const apiTodoCreateAndUpdate = apiTodoCreate.extend({
   updatedAt: z.date().optional(),
 });
 
-export const apiTodoId = apiTodoCreateAndUpdate.pick({
+export const apiTodoId = apiTodoUpsert.pick({
   id: true,
 });
 
 export type Todo = typeof todos.$inferSelect;
 export type TodoCreate = z.infer<typeof apiTodoCreate>;
 export type TodoUpdate = z.infer<typeof apiTodoUpdate>;
-export type TodoCreateAndUpdate = z.infer<typeof apiTodoCreateAndUpdate>;
+export type TodoUpsert = z.infer<typeof apiTodoUpsert>;
 export type TodoId = z.infer<typeof apiTodoId>;

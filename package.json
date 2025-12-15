@@ -20,7 +20,9 @@
     "docker:build:admin": "docker build -t stylo-admin -f apps/admin/Dockerfile .",
     "docker:run:server": "docker run -p 3005:3005 stylo-server",
     "docker:run:store": "docker run -p 3000:3000 stylo-store",
-    "docker:run:admin": "docker run -p 3001:3001 stylo-admin"
+    "docker:run:admin": "docker run -p 3001:3001 stylo-admin",
+    "db:up": "docker compose -f packages/db/docker-compose.yml up -d",
+    "db:down": "docker compose -f packages/db/docker-compose.yml down"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.0",
