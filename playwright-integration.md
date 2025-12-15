@@ -6,7 +6,7 @@ This guide provides a comprehensive implementation plan for setting up Playwrigh
 
 Your current monorepo structure:
 ```
-stylo/
+mono/
 ├── apps/
 │   ├── admin/ (TanStack Start app on port 3001)
 │   ├── server/ (Bun/Hono API on port 3035)

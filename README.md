@@ -1,4 +1,4 @@
-# stylo
+# mono
 
 A modern full-stack monorepo built with cutting-edge technologies for scalable web applications. This repository demonstrates the power of combining TanStack Start, tRPC, Drizzle ORM, and Better Auth in a Turborepo structure with Bun as the runtime.
 
@@ -60,7 +60,7 @@ Clone the repository and install dependencies:
 
 ```bash
 git clone <repository-url>
-cd stylo
+cd mono
 bun install
 ```
 
@@ -192,7 +192,7 @@ This project follows a structured development approach with clear priorities. Se
 ## 🏗️ Project Structure
 
 ```
-stylo/
+mono/
 ├── apps/
 │   ├── server/       # Hono API server (Bun)
 │   └── store/        # TanStack Start application

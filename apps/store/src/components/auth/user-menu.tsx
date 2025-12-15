@@ -18,9 +18,9 @@ import { useRouter } from "@tanstack/react-router";
 import { LogOut, User as UserIcon } from "lucide-react";
 import { toast } from "sonner";
 
-interface UserMenuProps {
+type UserMenuProps = {
   auth: Auth | null;
-}
+};
 
 export function UserMenu({ auth }: UserMenuProps) {
   const queryClient = useQueryClient();
@@ -31,14 +31,13 @@ export function UserMenu({ auth }: UserMenuProps) {
     return null;
   }
 
-  const getInitials = (name: string) => {
-    return name
+  const getInitials = (name: string) =>
+    name
       .split(" ")
       .map((part) => part.charAt(0))
       .join("")
       .toUpperCase()
       .slice(0, 2);
-  };
 
   const handleLogout = () => {
     try {

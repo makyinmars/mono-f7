@@ -16,13 +16,11 @@ export const createApi = ({
 }: {
   auth: AuthInstance;
   db: DatabaseInstance;
-}) => {
-  return {
-    trpcRouter: appRouter,
-    createTRPCContext: ({ headers }: { headers: Headers }) =>
-      createTRPCContextInternal({ auth, db, headers }),
-  };
-};
+}) => ({
+  trpcRouter: appRouter,
+  createTRPCContext: ({ headers }: { headers: Headers }) =>
+    createTRPCContextInternal({ auth, db, headers }),
+});
 
 export type AppRouter = typeof appRouter;
 export type { TodoAllProcedure } from "./router/todo";

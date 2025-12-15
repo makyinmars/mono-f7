@@ -12,7 +12,7 @@ export type AuthSession =
   | ReturnType<typeof createAuthClient>["$Infer"]["Session"]["session"]
   | null;
 
-export interface Auth {
+export type Auth = {
   user: AuthUser | null;
   session: AuthSession;
-}
+};

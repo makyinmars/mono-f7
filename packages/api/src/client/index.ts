@@ -28,10 +28,10 @@ export const transformer: TRPCCombinedDataTransformer = {
   output: SuperJSON,
 };
 
-export interface APIClientOptions {
+export type APIClientOptions = {
   serverUrl: string;
   headers: HTTPHeaders;
-}
+};
 
 export const createTrpcClient = ({ serverUrl, headers }: APIClientOptions) => {
   return createTRPCClient<AppRouter>({
@@ -46,8 +46,8 @@ export const createTrpcClient = ({ serverUrl, headers }: APIClientOptions) => {
         true: httpLink({
           url: serverUrl,
           transformer,
-          fetch(url, options) {
-            return fetch(url, {
+          fetch(_url, options) {
+            return fetch(_url, {
               ...options,
               /**
                * https://trpc.io/docs/client/cors
@@ -63,8 +63,8 @@ export const createTrpcClient = ({ serverUrl, headers }: APIClientOptions) => {
         false: httpLink({
           url: serverUrl,
           transformer,
-          fetch(url, options) {
-            return fetch(url, {
+          fetch(_url, options) {
+            return fetch(_url, {
               ...options,
               /**
                * https://trpc.io/docs/client/cors

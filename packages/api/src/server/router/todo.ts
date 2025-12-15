@@ -14,8 +14,8 @@ import type { RouterOutput } from "../utils";
 export type TodoAllProcedure = RouterOutput["todos"]["all"];
 
 const todoRouter = {
-  all: protectedProcedure.query(({ ctx }) => {
-    return ctx.db.query.todos.findMany({
+  all: protectedProcedure.query(({ ctx }) =>
+    ctx.db.query.todos.findMany({
       columns: {
         id: true,
         text: true,
@@ -26,8 +26,8 @@ const todoRouter = {
         updatedAt: true,
       },
       orderBy: desc(todos.createdAt),
-    });
-  }),
+    })
+  ),
 
   byId: publicProcedure.input(apiTodoId).query(async ({ ctx, input }) => {
     const parsed = apiTodoId.safeParse(input);

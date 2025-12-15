@@ -1,8 +1,8 @@
 import { createAuthClient as createBetterAuthClient } from "better-auth/react";
 
-export interface AuthClientOptions {
+export type AuthClientOptions = {
   apiBaseUrl: string;
-}
+};
 
 export function createAuthClient(options: AuthClientOptions) {
   return createBetterAuthClient({

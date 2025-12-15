@@ -36,9 +36,7 @@ const app = new Hono<{
   };
 }>();
 
-app.get("/healthcheck", (c) => {
-  return c.text("OK");
-});
+app.get("/healthcheck", (c) => c.text("OK"));
 
 app.use(logger());
 
@@ -75,9 +73,7 @@ app.use(
   })
 );
 
-app.get("/", (c) => {
-  return c.text("Hello Hono!");
-});
+app.get("/", (c) => c.text("Hello Hono!"));
 
 export default {
   port: env.SERVER_PORT,

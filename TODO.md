@@ -190,7 +190,7 @@
 ### Repository Structure
 
 ```
-stylo/
+mono/
 ├── apps/
 │   ├── server/    # API server (Bun + Hono)
 │   └── store/     # TanStack Start app ✅ (+ Dockerfile 🐳)

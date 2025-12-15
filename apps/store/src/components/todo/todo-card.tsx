@@ -34,15 +34,14 @@ export function TodoCard({ todo }: { todo: TodoAllProcedure[number] }) {
   const statusInfo = statusConfig[todo.status];
   const StatusIcon = statusInfo.icon;
 
-  const formatDate = (date: Date) => {
-    return new Intl.DateTimeFormat("en-US", {
+  const formatDate = (date: Date) =>
+    new Intl.DateTimeFormat("en-US", {
       month: "short",
       day: "numeric",
       year: "numeric",
       hour: "2-digit",
       minute: "2-digit",
     }).format(date);
-  };
 
   return (
     <Card className="h-full transition-shadow hover:shadow-md">
@@ -62,7 +61,7 @@ export function TodoCard({ todo }: { todo: TodoAllProcedure[number] }) {
       </CardHeader>
 
       <CardContent className="pt-0">
-        {todo.description && (
+        {!!todo.description && (
           <p className="mb-3 line-clamp-3 text-muted-foreground text-sm">
             {todo.description}
           </p>

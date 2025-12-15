@@ -29,13 +29,11 @@ export function getRouter() {
       defaultPendingComponent: DefaultLoading,
       defaultNotFoundComponent: NotFound,
       defaultErrorComponent: ({ error }) => <ErrorComponent error={error} />,
-      Wrap: (props: { children: React.ReactNode }) => {
-        return (
-          <TanstackQuery.Provider queryClient={queryClient}>
-            {props.children}
-          </TanstackQuery.Provider>
-        );
-      },
+      Wrap: (props: { children: React.ReactNode }) => (
+        <TanstackQuery.Provider queryClient={queryClient}>
+          {props.children}
+        </TanstackQuery.Provider>
+      ),
     }),
     queryClient
   );
@@ -44,7 +42,7 @@ export function getRouter() {
 }
 
 declare module "@tanstack/react-router" {
-  interface Register {
+  type Register = {
     router: ReturnType<typeof getRouter>;
-  }
+  };
 }

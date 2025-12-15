@@ -1,7 +1,7 @@
 # Repository Guidelines
 
 ## Project Structure & Module Organization
-Stylo is a Turborepo monorepo. Applications live in `apps/`: `store` (TanStack Start frontend), `server` (Hono API on Bun), and `admin` (Vite React dashboard). Shared code sits in `packages/`—`ui` for components, `helpers` for cross-cutting utilities, `db` for Drizzle schema/migrations, and `typescript-config` for compiler baselines. Keep assets, env examples, and Dockerfiles colocated with the owning workspace.
+Mono is a Turborepo monorepo. Applications live in `apps/`: `store` (TanStack Start frontend), `server` (Hono API on Bun), and `admin` (Vite React dashboard). Shared code sits in `packages/`—`ui` for components, `helpers` for cross-cutting utilities, `db` for Drizzle schema/migrations, and `typescript-config` for compiler baselines. Keep assets, env examples, and Dockerfiles colocated with the owning workspace.
 
 ## Build, Test, and Development Commands
 - `bun run dev` — launch all workspace servers via Turbo with hot reload.

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.2.0/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.3.9/schema.json",
   "linter": {
     "rules": {
       "a11y": {
@@ -10,16 +10,14 @@
         "noInvalidPositionAtImportRule": "off",
         "noSolidDestructuredProps": "off"
       },
-      "nursery": {
-        "useConsistentTypeDefinitions": "off"
-      },
       "style": {
         "noHeadElement": "off",
         "noEnum": "off",
         "noMagicNumbers": "off"
       },
       "performance": {
-        "noNamespaceImport": "off"
+        "noNamespaceImport": "off",
+        "noBarrelFile": "off"
       },
       "suspicious": {
         "noUnknownAtRules": "off",
@@ -39,5 +37,5 @@
       "quoteStyle": "double"
     }
   },
-  "extends": ["ultracite"]
+  "extends": ["ultracite/core", "ultracite/react", "ultracite/remix"]
 }
