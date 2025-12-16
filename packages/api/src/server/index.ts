@@ -3,9 +3,11 @@ import {
   createTRPCContext as createTRPCContextInternal,
   createTRPCRouter,
 } from "./trpc";
+import { authRouter } from "./router/auth";
 
 export const appRouter = createTRPCRouter({
   todos: todoRouter,
+  auth: authRouter,
 });
 
 export const createApi = () => ({

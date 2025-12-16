@@ -2,13 +2,27 @@
 
 import { DefaultCatchBoundary } from "@apps/admin/components/default-catch-boundary";
 import { NotFound } from "@apps/admin/components/not-found";
+import { currentUserQueryOptions } from "@apps/admin/fn/auth";
 import { seo } from "@apps/admin/utils/seo";
+import type { AppRouter } from "@repo/api/server";
+import { Toaster } from "@repo/ui/components/sonner";
 import appCss from "@repo/ui/globals.css?url";
-import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import type { QueryClient } from "@tanstack/react-query";
+import {
+  createRootRouteWithContext,
+  HeadContent,
+  Scripts,
+} from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
+import type { TRPCOptionsProxy } from "@trpc/tanstack-react-query";
 import type * as React from "react";
 
-export const Route = createRootRoute({
+export type MyRouterContext = {
+  queryClient: QueryClient;
+  trpc: TRPCOptionsProxy<AppRouter>;
+};
+
+export const Route = createRootRouteWithContext<MyRouterContext>()({
   head: () => ({
     meta: [
       {
@@ -48,6 +62,20 @@ export const Route = createRootRoute({
       { rel: "icon", href: "/favicon.ico" },
     ],
   }),
+  beforeLoad: async ({ context }) => {
+    const authenticatedUser = await context.queryClient.ensureQueryData(
+      currentUserQueryOptions
+    );
+
+    console.log("authenticatedUser", authenticatedUser);
+
+    return {
+      auth: {
+        session: authenticatedUser?.session,
+        user: authenticatedUser?.user,
+      },
+    };
+  },
   errorComponent: DefaultCatchBoundary,
   notFoundComponent: () => <NotFound />,
   shellComponent: RootDocument,
@@ -60,10 +88,10 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body>
-        <hr />
         {children}
         <TanStackRouterDevtools position="bottom-right" />
         <Scripts />
+        <Toaster />
       </body>
     </html>
   );

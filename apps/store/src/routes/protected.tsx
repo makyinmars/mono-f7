@@ -1,12 +1,18 @@
 import { UserMenu } from "@apps/store/components/auth/user-menu";
 import { TodoList } from "@apps/store/components/todo/todo-list";
 import { Separator } from "@repo/ui/components/separator";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, redirect } from "@tanstack/react-router";
 import { Route as MainRoute } from "../routes/__root";
 import { authMiddleware } from "../middleware/auth";
 
 export const Route = createFileRoute("/protected")({
   component: RouteComponent,
+  beforeLoad: async ({ context }) => {
+    // Handles client-side navigation (back button, link clicks)
+    if (!context.auth?.user) {
+      throw redirect({ to: "/" });
+    }
+  },
   server: {
     middleware: [authMiddleware],
   },
@@ -14,6 +20,7 @@ export const Route = createFileRoute("/protected")({
 
 function RouteComponent() {
   const { auth } = MainRoute.useRouteContext();
+  console.log("auth", auth);
   return (
     <div className="min-h-screen space-y-4 bg-background">
       {/* Header */}

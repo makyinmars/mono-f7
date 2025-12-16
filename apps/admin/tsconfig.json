@@ -6,9 +6,9 @@
     "moduleResolution": "Bundler",
     "allowJs": true,
     "forceConsistentCasingInFileNames": true,
-    "baseUrl": ".",
     "paths": {
-      "@apps/admin/*": ["./src/*"]
+      "@apps/admin/*": ["./src/*"],
+      "*": ["./*"]
     },
     "noEmit": true,
     "declaration": false,

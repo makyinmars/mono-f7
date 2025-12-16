@@ -1,4 +1,4 @@
-import { type Auth, authClient } from "@apps/store/clients/auth-client";
+import { type Auth, authClient } from "@apps/admin/clients/auth-client";
 import {
   Avatar,
   AvatarFallback,
@@ -17,7 +17,6 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "@tanstack/react-router";
 import { LogOut, User as UserIcon } from "lucide-react";
 import { toast } from "sonner";
-import { useTRPC } from "@apps/store/trpc/react";
 
 type UserMenuProps = {
   auth: Auth | null;
@@ -25,10 +24,10 @@ type UserMenuProps = {
 
 export function UserMenu({ auth }: UserMenuProps) {
   const queryClient = useQueryClient();
-  const trpc = useTRPC();
   const router = useRouter();
   const user = auth?.user;
   const session = auth?.session;
+
   if (!user) {
     return null;
   }
@@ -47,9 +46,8 @@ export function UserMenu({ auth }: UserMenuProps) {
         authClient.signOut({
           fetchOptions: {
             onSuccess: async () => {
-              // Remove the currentUser query to completely clear cache
               queryClient.removeQueries({
-                queryKey: [trpc.auth.getSession.queryKey()],
+                queryKey: ["currentUser"],
               });
 
               await router.navigate({

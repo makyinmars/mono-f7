@@ -64,8 +64,10 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
   }),
   beforeLoad: async ({ context }) => {
     const authenticatedUser = await context.queryClient.ensureQueryData(
-      currentUserQueryOptions
+      context.trpc.auth.getSession.queryOptions()
     );
+
+    console.log("authenticatedUser", authenticatedUser);
 
     return {
       auth: {

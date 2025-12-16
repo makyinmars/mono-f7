@@ -7,6 +7,15 @@ export const authClient: ReturnType<typeof createAuthClient> = createAuthClient(
   }
 );
 
+export type AuthUser = ReturnType<
+  typeof createAuthClient
+>["$Infer"]["Session"]["user"];
+
 export type AuthSession =
-  | ReturnType<typeof createAuthClient>["$Infer"]["Session"]
+  | ReturnType<typeof createAuthClient>["$Infer"]["Session"]["session"]
   | null;
+
+export type Auth = {
+  user: AuthUser | null;
+  session: AuthSession;
+};
