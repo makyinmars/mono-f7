@@ -1,9 +1,15 @@
 import { UserMenu } from "@apps/admin/components/auth/user-menu";
 import { authMiddleware } from "@apps/admin/middleware/auth";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/dashboard")({
   component: Dashboard,
+  beforeLoad: ({ context }) => {
+    // Handles client-side navigation (back button, link clicks)
+    if (!context.auth?.user) {
+      throw redirect({ to: "/" });
+    }
+  },
   server: {
     middleware: [authMiddleware],
   },

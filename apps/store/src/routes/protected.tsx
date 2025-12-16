@@ -2,12 +2,12 @@ import { UserMenu } from "@apps/store/components/auth/user-menu";
 import { TodoList } from "@apps/store/components/todo/todo-list";
 import { Separator } from "@repo/ui/components/separator";
 import { createFileRoute, Link, redirect } from "@tanstack/react-router";
-import { Route as MainRoute } from "../routes/__root";
 import { authMiddleware } from "../middleware/auth";
+import { Route as MainRoute } from "../routes/__root";
 
 export const Route = createFileRoute("/protected")({
   component: RouteComponent,
-  beforeLoad: async ({ context }) => {
+  beforeLoad: ({ context }) => {
     // Handles client-side navigation (back button, link clicks)
     if (!context.auth?.user) {
       throw redirect({ to: "/" });

@@ -6,7 +6,6 @@
     "moduleResolution": "Bundler",
     "allowJs": true,
     "forceConsistentCasingInFileNames": true,
-    "baseUrl": ".",
     "paths": {
       "@apps/store/*": ["./src/*"]
     },

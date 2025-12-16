@@ -1,4 +1,5 @@
 import { type Auth, authClient } from "@apps/store/clients/auth-client";
+import { useTRPC } from "@apps/store/trpc/react";
 import {
   Avatar,
   AvatarFallback,
@@ -17,7 +18,6 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "@tanstack/react-router";
 import { LogOut, User as UserIcon } from "lucide-react";
 import { toast } from "sonner";
-import { useTRPC } from "@apps/store/trpc/react";
 
 type UserMenuProps = {
   auth: Auth | null;

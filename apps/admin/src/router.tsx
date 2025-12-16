@@ -25,7 +25,7 @@ export function getRouter() {
       defaultStaleTime: 0,
       defaultPreload: "intent",
       defaultViewTransition: true,
-      defaultNotFoundComponent:() => <NotFound />,
+      defaultNotFoundComponent: () => <NotFound />,
       defaultErrorComponent: ({ error }) => <ErrorComponent error={error} />,
       Wrap: (props: { children: React.ReactNode }) => (
         <TanstackQuery.Provider queryClient={queryClient}>

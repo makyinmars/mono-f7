@@ -2,7 +2,6 @@
 
 import { DefaultCatchBoundary } from "@apps/admin/components/default-catch-boundary";
 import { NotFound } from "@apps/admin/components/not-found";
-import { currentUserQueryOptions } from "@apps/admin/fn/auth";
 import { seo } from "@apps/admin/utils/seo";
 import type { AppRouter } from "@repo/api/server";
 import { Toaster } from "@repo/ui/components/sonner";
@@ -64,7 +63,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
   }),
   beforeLoad: async ({ context }) => {
     const authenticatedUser = await context.queryClient.ensureQueryData(
-      currentUserQueryOptions
+      context.trpc.auth.getSession.queryOptions()
     );
 
     console.log("authenticatedUser", authenticatedUser);

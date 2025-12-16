@@ -12,4 +12,4 @@ export const db = drizzle({
   },
 });
 
-export { schema };
+export * as schema from "./schema";

@@ -2,7 +2,6 @@
 
 import { DefaultCatchBoundary } from "@apps/store/components/default-catch-boundary";
 import NotFound from "@apps/store/components/not-found";
-import { currentUserQueryOptions } from "@apps/store/fn/auth";
 import { seo } from "@apps/store/utils/seo";
 import type { AppRouter } from "@repo/api/server";
 import { Toaster } from "@repo/ui/components/sonner";

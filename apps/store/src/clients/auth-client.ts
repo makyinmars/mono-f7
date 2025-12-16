@@ -1,4 +1,3 @@
-import { env } from "@apps/store/env";
 import { createAuthClient } from "better-auth/react";
 
 export const authClient = createAuthClient({

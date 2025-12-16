@@ -1,5 +1,5 @@
-import { auth, type AuthInstance } from "@repo/auth/server";
-import { db, type DatabaseInstance } from "@repo/db/client";
+import { type AuthInstance, auth } from "@repo/auth/server";
+import { type DatabaseInstance, db } from "@repo/db/client";
 import { initTRPC, TRPCError } from "@trpc/server";
 import SuperJSON from "superjson";
 import { z } from "zod";
@@ -30,7 +30,9 @@ export const t = initTRPC.context<typeof createTRPCContext>().create({
       data: {
         ...shape.data,
         zodError:
-          error.cause instanceof z.ZodError ? z.treeifyError(error.cause) : null,
+          error.cause instanceof z.ZodError
+            ? z.treeifyError(error.cause)
+            : null,
       },
     };
   },
