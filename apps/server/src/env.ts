@@ -16,15 +16,10 @@ const createPortSchema = ({ defaultPort }: { defaultPort: number }) =>
 export const envSchema = z.object({
   SERVER_PORT: createPortSchema({ defaultPort: DEFAULT_SERVER_PORT }),
   SERVER_HOST: z.string().min(1).default(DEFAULT_SERVER_HOST),
-  SERVER_AUTH_SECRET: z.string().min(1),
-  DATABASE_URL: z.string().min(1),
 
-  // Multiple frontend URLs for store and admin apps
+  // Frontend URLs for CORS configuration
   PUBLIC_URL_STORE: z.url(),
   PUBLIC_URL_ADMIN: z.url(),
-
-  // Optional cookie domain for subdomain sharing
-  AUTH_COOKIE_DOMAIN: z.string().optional().default(""),
 });
 
 export const env = envSchema.parse(process.env);

@@ -1,15 +1,15 @@
 import { UserMenu } from "@apps/store/components/auth/user-menu";
 import { TodoList } from "@apps/store/components/todo/todo-list";
-import { assertAuthenticated } from "@apps/store/fn/auth";
 import { Separator } from "@repo/ui/components/separator";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Route as MainRoute } from "../routes/__root";
+import { authMiddleware } from "../middleware/auth";
 
 export const Route = createFileRoute("/protected")({
-  beforeLoad: ({ context }) => {
-    assertAuthenticated(context.auth);
-  },
   component: RouteComponent,
+  server: {
+    middleware: [authMiddleware],
+  },
 });
 
 function RouteComponent() {

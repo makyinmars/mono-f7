@@ -7,6 +7,9 @@ export type AuthClientOptions = {
 export function createAuthClient(options: AuthClientOptions) {
   return createBetterAuthClient({
     baseURL: options.apiBaseUrl,
+    // fetchOptions: {
+    //   credentials: "include",
+    // },
     plugins: [],
   });
 }

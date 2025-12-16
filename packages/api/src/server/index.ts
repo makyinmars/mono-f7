@@ -1,5 +1,3 @@
-import type { AuthInstance } from "@repo/auth/server";
-import type { DatabaseInstance } from "@repo/db/client";
 import todoRouter from "./router/todo";
 import {
   createTRPCContext as createTRPCContextInternal,
@@ -10,16 +8,10 @@ export const appRouter = createTRPCRouter({
   todos: todoRouter,
 });
 
-export const createApi = ({
-  auth,
-  db,
-}: {
-  auth: AuthInstance;
-  db: DatabaseInstance;
-}) => ({
+export const createApi = () => ({
   trpcRouter: appRouter,
   createTRPCContext: ({ headers }: { headers: Headers }) =>
-    createTRPCContextInternal({ auth, db, headers }),
+    createTRPCContextInternal({ headers }),
 });
 
 export type AppRouter = typeof appRouter;

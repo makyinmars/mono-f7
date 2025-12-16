@@ -1,61 +1,38 @@
-import type { DatabaseInstance } from "@repo/db/client";
+import { db } from "@repo/db/client";
 import { type BetterAuthOptions, betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { env } from "./env";
 
-export type AuthOptions = {
-  storeUrl: string;
-  adminUrl: string;
-  authSecret: string;
-  db: DatabaseInstance;
-  cookieDomain?: string;
-};
+// Base options for CLI compatibility
+export const baseOptions = {
+  database: drizzleAdapter(db, {
+    provider: "pg",
+  }),
+} satisfies BetterAuthOptions;
 
-export type AuthInstance = ReturnType<typeof createAuth>;
+// Build trusted origins from environment
+const trustedOrigins = [
+  new URL(env.PUBLIC_URL_STORE).origin,
+  new URL(env.PUBLIC_URL_ADMIN).origin,
+];
 
-/**
- * This function is abstracted for schema generations in cli-config.ts
- */
-export const getBaseOptions = (db: DatabaseInstance) =>
-  ({
-    database: drizzleAdapter(db, {
-      provider: "pg",
-    }),
-
-    /**
-     * Only uncomment the line below if you are using plugins, so that
-     * your types can be correctly inferred:
-     */
-    // plugins: [],
-  }) satisfies BetterAuthOptions;
-
-export const createAuth = ({
-  storeUrl,
-  adminUrl,
-  db,
-  authSecret,
-  cookieDomain,
-}: AuthOptions) => {
-  console.log("store url", storeUrl);
-  console.log("admin url", adminUrl);
-  console.log("cookie domain", cookieDomain);
-
-  // Build trusted origins array
-  const trustedOrigins = [new URL(storeUrl).origin, new URL(adminUrl).origin];
-
-  return betterAuth({
-    ...getBaseOptions(db),
-    secret: authSecret,
-    trustedOrigins,
-    session: {
-      cookieCache: {
-        enabled: true,
-        maxAge: 5 * 60,
-      },
-    },
-    emailAndPassword: {
+// Singleton auth instance - initialized at module load
+export const auth = betterAuth({
+  ...baseOptions,
+  secret: env.AUTH_SECRET,
+  trustedOrigins,
+  session: {
+    cookieCache: {
       enabled: true,
-      autoSignIn: true,
-      requireEmailVerification: false,
+      maxAge: 5 * 60,
     },
-  });
-};
+  },
+  emailAndPassword: {
+    enabled: true,
+    autoSignIn: true,
+    requireEmailVerification: false,
+  },
+});
+
+// Export type for consumers
+export type AuthInstance = typeof auth;

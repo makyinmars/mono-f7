@@ -1,16 +1,12 @@
-import type { AuthInstance } from "@repo/auth/server";
-import type { DatabaseInstance } from "@repo/db/client";
+import { auth, type AuthInstance } from "@repo/auth/server";
+import { db, type DatabaseInstance } from "@repo/db/client";
 import { initTRPC, TRPCError } from "@trpc/server";
 import SuperJSON from "superjson";
 import { ZodError } from "zod";
 
 export const createTRPCContext = async ({
-  auth,
-  db,
   headers,
 }: {
-  auth: AuthInstance;
-  db: DatabaseInstance;
   headers: Headers;
 }): Promise<{
   db: DatabaseInstance;

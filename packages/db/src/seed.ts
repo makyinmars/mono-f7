@@ -1,9 +1,6 @@
-import { createDb } from "./client";
-import { env } from "./env";
+import { db } from "./client";
 import { todos, user } from "./schema";
 import { TodoStatus } from "./schema/todo";
-
-const db = createDb({ databaseUrl: env.DATABASE_URL });
 
 const seedUsers = [
   {

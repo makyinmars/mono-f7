@@ -1,7 +1,6 @@
 import { trpcServer } from "@hono/trpc-server";
 import { createApi } from "@repo/api/server";
-import { createAuth } from "@repo/auth/server";
-import { createDb } from "@repo/db/client";
+import { auth } from "@repo/auth/server";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { logger } from "hono/logger";
@@ -19,15 +18,7 @@ const wildcardPath = {
   TRPC: "/api/trpc/*",
 } as const;
 
-const db = createDb({ databaseUrl: env.DATABASE_URL });
-const auth = createAuth({
-  authSecret: env.SERVER_AUTH_SECRET,
-  db,
-  storeUrl: env.PUBLIC_URL_STORE,
-  adminUrl: env.PUBLIC_URL_ADMIN,
-  cookieDomain: env.AUTH_COOKIE_DOMAIN,
-});
-const api = createApi({ auth, db });
+const api = createApi();
 
 const app = new Hono<{
   Variables: {
