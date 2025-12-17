@@ -2,7 +2,6 @@ import { boolean, pgEnum, pgTable, text, uuid } from "drizzle-orm/pg-core";
 import { createInsertSchema, createUpdateSchema } from "drizzle-zod";
 import { z } from "zod";
 import { timestamps } from "../utils";
-import { user } from "./auth";
 
 export enum TodoStatus {
   NOT_STARTED = "NOT_STARTED",
@@ -22,9 +21,6 @@ export const todos = pgTable("todos", {
   description: text("description"),
   active: boolean("active").default(true).notNull(),
   status: todoStatusSchema("status").default(TodoStatus.NOT_STARTED).notNull(),
-  userId: text("user_id")
-    .notNull()
-    .references(() => user.id, { onDelete: "cascade" }),
   ...timestamps,
 });
 
@@ -34,7 +30,6 @@ export const todoInsert = createInsertSchema(todos, {
 
 export const apiTodoCreate = todoInsert.omit({
   id: true,
-  userId: true,
   createdAt: true,
   updatedAt: true,
 });
@@ -44,7 +39,6 @@ export const todoUpdate = createUpdateSchema(todos, {
 });
 
 export const apiTodoUpdate = todoUpdate.omit({
-  userId: true,
   createdAt: true,
   updatedAt: true,
 });

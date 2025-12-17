@@ -1,6 +1,5 @@
 "use client";
 
-import { Slot } from "radix-ui";
 import { Button } from "@repo/ui/components/button";
 import { Input } from "@repo/ui/components/input";
 import { Separator } from "@repo/ui/components/separator";
@@ -22,6 +21,7 @@ import { useIsMobile } from "@repo/ui/hooks/use-mobile";
 import { cn } from "@repo/ui/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 import { PanelLeftIcon } from "lucide-react";
+import { Slot } from "radix-ui";
 import * as React from "react";
 
 const SIDEBAR_COOKIE_NAME = "sidebar_state";

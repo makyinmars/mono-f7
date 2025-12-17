@@ -38,7 +38,8 @@
     "sonner": "catalog:",
     "@tailwindcss/vite": "catalog:",
     "zod": "catalog:",
-    "@t3-oss/env-core": "catalog:"
+    "@t3-oss/env-core": "catalog:",
+    "next-themes": "catalog:"
   },
   "devDependencies": {
     "@repo/typescript-config": "*",

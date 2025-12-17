@@ -12,6 +12,9 @@
     "check-types": "tsc --noEmit",
     "clean": "rm -rf node_modules dist .turbo .cache"
   },
+  "dependencies": {
+    "date-fns": "catalog:"
+  },
   "devDependencies": {
     "@repo/typescript-config": "*",
     "@types/node": "^22.15.3",
@@ -25,6 +28,10 @@
     "./auth": {
       "types": "./src/auth.ts",
       "default": "./src/auth.ts"
+    },
+    "./date": {
+      "types": "./src/date.ts",
+      "default": "./src/date.ts"
     }
   }
 }

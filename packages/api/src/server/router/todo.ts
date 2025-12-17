@@ -3,6 +3,7 @@ import {
   apiTodoCreate,
   apiTodoId,
   apiTodoUpdate,
+  apiTodoUpsert,
   todos,
   user,
 } from "@repo/db/schema";
@@ -11,22 +12,14 @@ import { TRPCError, type TRPCRouterRecord } from "@trpc/server";
 import { protectedProcedure, publicProcedure } from "../trpc";
 import type { RouterOutput } from "../utils";
 
-export type TodoAllProcedure = RouterOutput["todos"]["all"];
+export type TodoAllProcedure = RouterOutput["todo"]["list"];
 
 const todoRouter = {
-  all: protectedProcedure.query(({ ctx }) =>
-    ctx.db.query.todos.findMany({
-      columns: {
-        id: true,
-        text: true,
-        description: true,
-        status: true,
-        active: true,
-        createdAt: true,
-        updatedAt: true,
-      },
-      orderBy: desc(todos.createdAt),
-    })
+  list: publicProcedure.query(
+    async ({ ctx }) =>
+      await ctx.db.query.todos.findMany({
+        orderBy: desc(todos.createdAt),
+      })
   ),
 
   byId: publicProcedure.input(apiTodoId).query(async ({ ctx, input }) => {
@@ -61,7 +54,6 @@ const todoRouter = {
         },
       })
       .from(todos)
-      .innerJoin(user, eq(todos.userId, user.id))
       .where(eq(todos.id, parsed.data.id));
 
     if (!dbTodo) {
@@ -88,7 +80,6 @@ const todoRouter = {
       const [created] = await ctx.db
         .insert(todos)
         .values({
-          userId: ctx.session.user.id,
           ...parsed.data,
         })
         .returning();
@@ -116,6 +107,51 @@ const todoRouter = {
         .returning();
 
       return updated;
+    }),
+
+  upsert: protectedProcedure
+    .input(apiTodoUpsert)
+    .mutation(async ({ ctx, input }) => {
+      const parsed = apiTodoUpsert.safeParse(input);
+
+      if (!parsed.success) {
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: parsed.error.issues.map((i) => i.message).join(", "),
+        });
+      }
+
+      const { id, ...data } = parsed.data;
+
+      if (id) {
+        // Update existing todo
+        const [updated] = await ctx.db
+          .update(todos)
+          .set({
+            ...data,
+          })
+          .where(eq(todos.id, id))
+          .returning();
+
+        if (!updated) {
+          throw new TRPCError({
+            code: "NOT_FOUND",
+            message: `No todo found with ID ${id}`,
+          });
+        }
+
+        return updated;
+      }
+
+      // Create new todo
+      const [created] = await ctx.db
+        .insert(todos)
+        .values({
+          ...data,
+        })
+        .returning();
+
+      return created;
     }),
 
   delete: protectedProcedure

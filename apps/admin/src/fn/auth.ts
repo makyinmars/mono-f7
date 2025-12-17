@@ -58,5 +58,3 @@ export const assertAuthenticated = (auth: Auth | null) => {
     });
   }
 };
-
-

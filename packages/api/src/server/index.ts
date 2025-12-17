@@ -6,7 +6,7 @@ import {
 } from "./trpc";
 
 export const appRouter = createTRPCRouter({
-  todos: todoRouter,
+  todo: todoRouter,
   auth: authRouter,
 });
 

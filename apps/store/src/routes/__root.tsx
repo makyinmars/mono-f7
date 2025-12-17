@@ -14,6 +14,7 @@ import {
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import type { TRPCOptionsProxy } from "@trpc/tanstack-react-query";
+import { ThemeProvider } from "next-themes";
 import type * as React from "react";
 
 export type MyRouterContext = {
@@ -82,15 +83,22 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
-    <html>
+    <html suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
       <body className="flex flex-col gap-4 p-4">
-        {children}
-        <TanStackRouterDevtools position="bottom-right" />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          disableTransitionOnChange
+          enableSystem
+        >
+          {children}
+          <TanStackRouterDevtools position="bottom-right" />
+          <Toaster />
+        </ThemeProvider>
         <Scripts />
-        <Toaster />
       </body>
     </html>
   );

@@ -1,5 +1,4 @@
 import { UserMenu } from "@apps/store/components/auth/user-menu";
-import { TodoList } from "@apps/store/components/todo/todo-list";
 import { Separator } from "@repo/ui/components/separator";
 import { createFileRoute, Link, redirect } from "@tanstack/react-router";
 import { authMiddleware } from "../middleware/auth";
@@ -61,8 +60,6 @@ function RouteComponent() {
 
           <Separator />
 
-          {/* Todos Grid */}
-          <TodoList />
         </div>
       </main>
     </div>
