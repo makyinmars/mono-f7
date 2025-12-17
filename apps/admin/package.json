@@ -27,6 +27,7 @@
     "@trpc/client": "catalog:",
     "@trpc/server": "catalog:",
     "@trpc/tanstack-react-query": "catalog:",
+    "better-auth": "catalog:",
     "lucide-react": "catalog:",
     "nitro": "catalog:",
     "superjson": "catalog:",
