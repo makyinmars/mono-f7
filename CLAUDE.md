@@ -19,10 +19,11 @@ This is a Turborepo monorepo with three applications and shared packages:
 - **@repo/api** - tRPC API layer with type-safe procedures
 - **@repo/auth** - Better Auth authentication system with Drizzle adapter
 - **@repo/db** - Drizzle ORM database layer with PostgreSQL
+- **@repo/helpers** - Cross-cutting utilities
 
 ## Package Manager & Runtime
 
-- **Package Manager**: Bun (v1.2.20+)
+- **Package Manager**: Bun (v1.3.4+)
 - **Node Version**: >=22
 - **Runtime**: Uses Bun for the server app and for both apps: admin and store
 
@@ -145,9 +146,9 @@ turbo gen react-component
 
 ### Import Path Conventions
 
-- **@repo/*** - Shared packages (ui, auth, db, api, etc.)
-- **@apps/store/*** - Store app internal imports (components, utils, etc.)
-- **@apps/admin/*** - Admin app internal imports (components, utils, etc.)
+- **@repo/\*** - Shared packages (ui, auth, db, api, etc.)
+- **@apps/store/\*** - Store app internal imports (components, utils, etc.)
+- **@apps/admin/\*** - Admin app internal imports (components, utils, etc.)
 - Path resolution handled by vite-tsconfig-paths plugin in Vite configuration
 - TypeScript path mappings configured in each app's tsconfig.json
 

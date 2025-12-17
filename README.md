@@ -50,7 +50,7 @@ This project aims to be a comprehensive example of modern web development practi
 
 ### Prerequisites
 
-- **Bun** v1.2.19+ (recommended package manager and runtime)
+- **Bun** v1.3.4+ (recommended package manager and runtime)
 - **Node.js** v22+ (for Next.js apps)
 - **Docker** (for PostgreSQL database via `bun run db:up`)
 

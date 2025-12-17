@@ -1,0 +1,68 @@
+---
+alwaysApply: true
+---
+
+- Package Manager: Bun (v1.3.4+)
+- Node Version: >=22
+- Runtime: Bun for all apps
+
+## Development Commands
+
+```bash
+# Development
+bun run dev                    # Start all apps
+turbo dev --filter=<app>       # Start single app (server, store, admin)
+
+# Build & Quality
+bun run build                  # Build all
+bun run lint                   # Lint with Ultracite
+bun run format                 # Format with Ultracite
+bun run check-types            # TypeScript validation
+
+# Database (packages/db)
+bun run db:migrate             # Run migrations
+bun run db:push                # Push schema changes
+
+# Docker
+bun run docker:build           # Build all images
+bun run docker:build:store     # Build specific app
+```
+
+## Coding Style & Conventions
+
+- **Language**: TypeScript + React
+- **Formatter**: Ultracite (Biome-backed)
+  - Double quotes
+  - 2-space indentation
+  - Auto import ordering
+- **Naming**:
+  - `PascalCase` for components and hooks
+  - `camelCase` for functions and variables
+  - `kebab-case` for folders
+- **Structure**: Co-locate feature files under `apps/*/src`, prefer small barrels over deep index chains
+
+## Import Path Conventions
+
+- `@repo/*` - Shared packages (ui, auth, db, api, helpers)
+- `@apps/store/*` - Store app internal imports
+- `@apps/admin/*` - Admin app internal imports
+
+## Environment Variables
+
+- Each workspace has its own `.env` file - never use a root-level `.env`
+- Copy from `.env.example` files in each app/package
+- Environment validation uses Zod schemas in `src/env.ts`
+- Update `turbo.json` env arrays when adding new variables
+
+## Testing
+
+- **Unit/Integration**: Vitest - place `*.test.ts` files beside the code they cover
+- **E2E**: Playwright - see `playwright-integration.md`
+- Add `vitest.config.ts` when a package gets its first test
+
+## Commit Guidelines
+
+- Short, imperative commit messages (e.g., "update vite config for vercel")
+- Keep commits focused
+- Reference issue IDs when helpful
+- Always run `bun run lint` and `bun run format` before pushing
