@@ -1,7 +1,8 @@
+import { clientEnv } from "@apps/store/env";
 import { createAuthClient } from "better-auth/react";
 
 export const authClient = createAuthClient({
-  baseURL: import.meta.env.VITE_PUBLIC_API_URL,
+  baseURL: clientEnv.VITE_API_URL,
 });
 
 export type AuthUser = ReturnType<

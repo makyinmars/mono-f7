@@ -36,7 +36,8 @@
     "@hookform/resolvers": "catalog:",
     "sonner": "catalog:",
     "@tailwindcss/vite": "catalog:",
-    "zod": "catalog:"
+    "zod": "catalog:",
+    "@t3-oss/env-core": "catalog:"
   },
   "devDependencies": {
     "@repo/typescript-config": "*",

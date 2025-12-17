@@ -29,10 +29,10 @@ RUN turbo prune admin --docker
 FROM base AS installer
 
 # Build arguments for environment configuration
-ARG PUBLIC_API_URL
+ARG VITE_API_URL
 
 # Convert build args to environment variables
-ENV PUBLIC_API_URL=${PUBLIC_API_URL}
+ENV VITE_API_URL=${VITE_API_URL}
 
 # Copy pruned workspace package.json files
 COPY --from=builder /app/out/json/ .

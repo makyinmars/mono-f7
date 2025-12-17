@@ -1,9 +1,9 @@
-import { env } from "@apps/admin/env";
+import { clientEnv } from "@apps/admin/env";
 import { createAuthClient } from "@repo/auth/client";
 
 export const authClient: ReturnType<typeof createAuthClient> = createAuthClient(
   {
-    apiBaseUrl: env.PUBLIC_API_URL,
+    apiBaseUrl: clientEnv.VITE_API_URL,
   }
 );
 
