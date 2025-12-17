@@ -1,8 +1,20 @@
 import LoadingState from "@apps/store/components/common/loading-state";
 import { APP_NAME } from "@apps/store/constants/app";
 import { createFileRoute, lazyRouteComponent } from "@tanstack/react-router";
+import { redirect } from "@tanstack/react-router";
+import { authMiddleware } from "@apps/store/middleware/auth";
 
 export const Route = createFileRoute("/todo/")({
+
+  beforeLoad: ({ context }) => {
+    // Handles client-side navigation (back button, link clicks)
+    if (!context.auth?.user) {
+      throw redirect({ to: "/" });
+    }
+  },
+  server: {
+    middleware: [authMiddleware],
+  },
   loader: async ({ context }) => {
     const todos = await context.queryClient.ensureQueryData(
       context.trpc.todo.list.queryOptions()
